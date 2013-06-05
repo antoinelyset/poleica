@@ -12,7 +12,6 @@ Gem::Specification.new do |s|
   s.files       = Dir[
                     'poleica.gemspec',
                     'vendor/**/*',
-                    'build/**/*',
                     'lib/**/*',
                     'LICENSE',
                     'README'

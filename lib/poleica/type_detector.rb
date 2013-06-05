@@ -25,7 +25,10 @@ module Poleica
 
     MIMETYPE_EXTRACT_REGEX = /([^;:]+)/
 
-    TYPES = [Document, Image]
+    TYPES = [
+      Types::Image,
+      Types::Document
+    ]
 
     def extract_mimetype(file_path)
       `file -b --mime '#{file_path}'`.strip[MIMETYPE_EXTRACT_REGEX] || ''
@@ -36,11 +39,11 @@ module Poleica
     end
 
     def detect_type_with_extension(extension)
-      TYPES.find(nil) { |type| type::EXTENSIONS.include?(extension) }
+      TYPES.find { |type| type::EXTENSIONS.include?(extension) }
     end
 
     def detect_type_with_mimetype(mimetype)
-      TYPES.find(nil) { |type| type::MIMETYPES.include?(mimetype) }
+      TYPES.find { |type| type::MIMETYPES.include?(mimetype) }
     end
   end # class TypeDetector
 end # module Poleica
