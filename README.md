@@ -1,4 +1,5 @@
-# A Try a Docsplit Real Gemification
+# Poleica
+## Opinionated ( <3 this word) thumbnail generator, heavily inspired by Docsplit
 ### Poleica = Polaroid + Leica (Real Hipster)
 
 
@@ -28,3 +29,13 @@ Poleica.new(file_path).convert_to(:png, width: 400, weight: 400)
 ## Conventions
 
 - I wrote mimetype not mime_type
+
+## Dependencies
+
+- GraphicsMagick (gm)
+- Java (I know...)
+- Headless Libreoffice (for your lovely server) : [https://wiki.documentfoundation.org/Development/HeadlessBuild](https://wiki.documentfoundation.org/Development/HeadlessBuild)
+
+## Thanks
+
+- Webkit for their Mimetype test files

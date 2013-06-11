@@ -2,7 +2,7 @@
 module Poleica
   module Types
     class Image
-      MIMETYPES = [
+      COMPATIBLE_MIMETYPES = [
         'image/x-portable-pixmap', # .ppm, .pgm, .pbm, .pnm
         'image/x-portable-bitmap', # .pbm
         'image/x-ms-bmp',          # .bmp
@@ -13,12 +13,11 @@ module Poleica
         'image/png'                # .png
       ]
 
-      EXTENSIONS = [
+      COMPATIBLE_EXTENSIONS = [
         'tiff',
         'jpeg',
         'ppm',
         'pgm',
-        'pbm',
         'pnm',
         'pbm',
         'bmp',
@@ -28,6 +27,10 @@ module Poleica
         'gif',
         'png'
       ]
+
+      def initialize(file_path)
+
+      end
     end # class Image
   end # module Types
 end # module Poleica

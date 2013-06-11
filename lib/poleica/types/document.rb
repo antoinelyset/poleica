@@ -2,7 +2,7 @@
 module Poleica
   module Types
     class Document
-      MIMETYPES = [
+      COMPATIBLE_MIMETYPES = [
         'application/vnd.oasis.opendocument.text', # .odt
         'application/vnd.ms-office',               # .doc
         'application/vnd.ms-excel',                # .xls
@@ -14,7 +14,7 @@ module Poleica
         'text/rtf'                                 # .rft
       ]
 
-      EXTENSIONS = [
+      COMPATIBLE_EXTENSIONS = [
         'html',
         'htm',
         'odt',
@@ -28,7 +28,7 @@ module Poleica
         'rft'
       ]
 
-      def new(path)
+      def initialize(file_path)
 
       end
     end # class Document
