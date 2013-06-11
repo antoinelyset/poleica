@@ -2,32 +2,32 @@
 module Poleica
   module Converters
     class GraphicsMagick
-      COMPATIBLE_MIMETYPES = [
-        'image/gif',
-        'image/png',
-        'image/jpeg',
-        'image/tiff',
-        'image/svg+xml',
-        'image/x-ms-bmp',
-        'image/x-portable-bitmap',
-        'application/postscript',
-        'image/x-portable-pixma'
-      ]
+      COMPATIBLE_MIMETYPES = %w{
+        image/x-portable-bitmap
+        application/postscript
+        image/x-portable-pixma
+        image/x-ms-bmp
+        image/svg+xml
+        image/jpeg
+        image/tiff
+        image/gif
+        image/png
+      }
 
-      COMPATIBLE_EXTENSIONS = [
-        'tiff',
-        'jpeg',
-        'ppm',
-        'pgm',
-        'pnm',
-        'pbm',
-        'bmp',
-        'svg',
-        'jpg',
-        'tif',
-        'gif',
-        'png'
-      ]
+      COMPATIBLE_EXTENSIONS = %w{
+        tiff
+        jpeg
+        ppm
+        pgm
+        pnm
+        pbm
+        bmp
+        svg
+        jpg
+        tif
+        gif
+        png
+      }
 
       attr_reader :file
 

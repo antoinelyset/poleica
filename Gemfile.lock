@@ -1,3 +1,19 @@
+GIT
+  remote: git://github.com/bbatsov/rubocop.git
+  revision: 8fd30007000906e9a99c1c0185215efa20ad1231
+  specs:
+    rubocop (0.8.1)
+      parser (>= 2.0.0.beta1, <= 2.0.0)
+      rainbow (>= 1.1.4)
+
+GIT
+  remote: git://github.com/guard/guard-minitest.git
+  revision: e9864dc85e6f52844afded8d93b9881b5e14f6f7
+  specs:
+    guard-minitest (1.0.0.beta.2)
+      guard (>= 1.8)
+      minitest (>= 2.1)
+
 PATH
   remote: .
   specs:
@@ -7,25 +23,14 @@ GEM
   remote: https://rubygems.org/
   specs:
     ast (1.0.2)
-    binding_of_caller (0.7.1)
-      debug_inspector (>= 0.0.1)
-    bond (0.4.3)
     coderay (1.0.9)
     colorize (0.5.8)
-    columnize (0.3.6)
     coveralls (0.6.7)
       colorize
       multi_json (~> 1.3)
       rest-client
       simplecov (>= 0.7)
       thor
-    debug_inspector (0.0.2)
-    debugger (1.6.0)
-      columnize (>= 0.3.1)
-      debugger-linecache (~> 1.2.0)
-      debugger-ruby_core_source (~> 1.2.1)
-    debugger-linecache (1.2.0)
-    debugger-ruby_core_source (1.2.2)
     ffi (1.9.0)
     formatador (0.2.4)
     guard (1.8.0)
@@ -34,12 +39,6 @@ GEM
       lumberjack (>= 1.0.2)
       pry (>= 0.9.10)
       thor (>= 0.14.6)
-    guard-minitest (0.5.0)
-      guard (>= 0.4)
-    interception (0.3)
-    jist (1.5.1)
-      json
-    json (1.8.0)
     listen (1.2.0)
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
@@ -49,36 +48,13 @@ GEM
     mime-types (1.23)
     minitest (5.0.3)
     multi_json (1.7.6)
-    parser (2.0.0.beta2)
+    parser (2.0.0.beta5)
       ast (~> 1.0)
       slop (~> 3.4)
     pry (0.9.12.2)
       coderay (~> 1.0.5)
       method_source (~> 0.8)
       slop (~> 3.4)
-    pry-debugger (0.2.2)
-      debugger (~> 1.3)
-      pry (~> 0.9.10)
-    pry-doc (0.4.6)
-      pry (>= 0.9)
-      yard (>= 0.8)
-    pry-docmore (0.1.1)
-      pry
-      pry-doc
-    pry-plus (1.0.0)
-      bond
-      jist
-      pry-debugger
-      pry-doc
-      pry-docmore
-      pry-rescue
-      pry-stack_explorer
-    pry-rescue (1.1.1)
-      interception (>= 0.3)
-      pry
-    pry-stack_explorer (0.4.9)
-      binding_of_caller (>= 0.7)
-      pry (~> 0.9.11)
     rainbow (1.1.4)
     rake (10.0.4)
     rb-fsevent (0.9.3)
@@ -88,16 +64,12 @@ GEM
       ffi (>= 0.5.0)
     rest-client (1.6.7)
       mime-types (>= 1.16)
-    rubocop (0.8.2)
-      parser (>= 2.0.0.beta1, <= 2.0.0)
-      rainbow (>= 1.1.4)
     simplecov (0.7.1)
       multi_json (~> 1.0)
       simplecov-html (~> 0.7.1)
     simplecov-html (0.7.1)
     slop (3.4.5)
     thor (0.18.1)
-    yard (0.8.6.1)
 
 PLATFORMS
   ruby
@@ -105,9 +77,8 @@ PLATFORMS
 DEPENDENCIES
   bundler (~> 1.3)
   coveralls
-  guard-minitest
+  guard-minitest!
   minitest
   poleica!
-  pry-plus
   rake
-  rubocop
+  rubocop!

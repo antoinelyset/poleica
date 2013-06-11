@@ -15,6 +15,4 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.add_development_dependency 'bundler', '~> 1.3'
   s.add_development_dependency 'rake'
-  s.add_development_dependency 'guard-minitest'
-  s.add_development_dependency 'pry-plus'
 end

@@ -2,15 +2,15 @@
 require File.expand_path('../test_helper', __FILE__)
 
 class TypeableTest < Minitest::Test
-  EXTENSION_NAMES ||= ['doc', 'mp3', 'pdf', 'png']
+  EXTENSION_NAMES ||= %w{doc pdf mp3 png}
 
   def test_that_it_extracts_a_mimetype
-    expected_mime_types = [
-                            "application/vnd.ms-office",
-                            "audio/mpeg",
-                            "application/pdf",
-                            "image/png"
-                          ]
+    expected_mime_types = %w{
+                            application/vnd.ms-office
+                            application/pdf
+                            audio/mpeg
+                            image/png
+                          }
     mime_types = type_detectors_enumerator.map(&:file_mimetype)
     assert_equal(expected_mime_types, mime_types)
   end

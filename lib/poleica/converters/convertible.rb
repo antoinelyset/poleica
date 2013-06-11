@@ -13,13 +13,13 @@ module Poleica
     end
 
     def compatible_converters_by_mimetype
-      CONVERTERS.find_all do |converter|
+      CONVERTERS.select do |converter|
         converter::COMPATIBLE_MIMETYPES.include?(file_mimetype)
       end
     end
 
     def compatible_converters_by_extension
-      CONVERTERS.find_all do |converter|
+      CONVERTERS.select do |converter|
         converter::COMPATIBLE_EXTENSIONS.include?(file_extension)
       end
     end

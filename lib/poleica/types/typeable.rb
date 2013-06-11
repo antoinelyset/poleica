@@ -36,11 +36,15 @@ module Poleica
     end
 
     def detect_type_with_extension
-      TYPES.find { |type| type::COMPATIBLE_EXTENSIONS.include?(file_extension) }
+      TYPES.find do |type|
+        type::COMPATIBLE_EXTENSIONS.include?(file_extension)
+      end
     end
 
     def detect_type_with_mimetype
-      TYPES.find { |type| type::COMPATIBLE_MIMETYPES.include?(file_mimetype) }
+      TYPES.find do |type|
+        type::COMPATIBLE_MIMETYPES.include?(file_mimetype)
+      end
     end
   end # class Typeable
 end # module Poleica

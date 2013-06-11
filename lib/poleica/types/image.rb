@@ -13,20 +13,20 @@ module Poleica
         'image/png'                # .png
       ]
 
-      COMPATIBLE_EXTENSIONS = [
-        'tiff',
-        'jpeg',
-        'ppm',
-        'pgm',
-        'pnm',
-        'pbm',
-        'bmp',
-        'svg',
-        'jpg',
-        'tif',
-        'gif',
-        'png'
-      ]
+      COMPATIBLE_EXTENSIONS = %w{
+        tiff
+        jpeg
+        ppm
+        pgm
+        pnm
+        pbm
+        bmp
+        svg
+        jpg
+        tif
+        gif
+        png
+      }
 
       def initialize(file_path)
 

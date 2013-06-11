@@ -14,19 +14,19 @@ module Poleica
         'text/rtf'                                 # .rft
       ]
 
-      COMPATIBLE_EXTENSIONS = [
-        'html',
-        'htm',
-        'odt',
-        'doc',
-        'xls',
-        'ppt',
-        'pps',
-        'doc',
-        'pdf',
-        'txt',
-        'rft'
-      ]
+      COMPATIBLE_EXTENSIONS = %w{
+        html
+        htm
+        odt
+        doc
+        xls
+        ppt
+        pps
+        doc
+        pdf
+        txt
+        rft
+      }
 
       def initialize(file_path)
 
