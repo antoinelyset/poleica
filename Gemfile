@@ -14,5 +14,5 @@ group :development do
 
   # Guards
   gem 'guard-rubocop'
-  gem 'guard-minitest'
+  gem 'guard-minitest', :github => 'guard/guard-minitest'
 end
