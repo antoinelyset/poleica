@@ -38,6 +38,6 @@ module Poleica
       def to_png
         `gm convert #{file.path} #{file.name}.png`
       end
-    end # class PDF
+    end # class GraphicsMagick
   end # module Converters
 end # module Poleica

@@ -1,5 +1,5 @@
 # -*- encoding: utf-8 -*-
-require File.expand_path('../test_helper', __FILE__)
+require 'test_helper'
 
 class TypeableTest < Minitest::Test
   EXTENSION_NAMES ||= %w{doc pdf mp3 png}
@@ -11,13 +11,13 @@ class TypeableTest < Minitest::Test
                             audio/mpeg
                             image/png
                           }
-    mime_types = type_detectors_enumerator.map(&:file_mimetype)
+    mime_types = files_enumerator.map(&:file_mimetype)
     assert_equal(expected_mime_types, mime_types)
   end
 
   def test_that_it_extracts_an_extension
     expected_extensions = extension_names
-    extensions          = type_detectors_enumerator.map(&:file_extension)
+    extensions          = files_enumerator.map(&:file_extension)
     assert_equal(expected_extensions, extensions)
   end
 
@@ -28,32 +28,28 @@ class TypeableTest < Minitest::Test
                          Poleica::Types::Document,
                          Poleica::Types::Image
                        ]
-    classes = type_detectors_enumerator.map do |type_detector|
+    classes = files_enumerator.map do |type_detector|
       type_detector.file_type.class
     end
     assert(expected_classes, classes)
   end
 
   def test_that_it_returns_null_type_by_default
-    mp3_path = "#{support_path}/files/example.mp3"
+    mp3_path = "#{Support.support_path}/files/example.mp3"
     type_class = Poleica::File.new(mp3_path).file_type.class
     assert_equal(type_class, Poleica::Types::Null)
   end
 
   ## Helpers
 
-  def type_detectors_enumerator
+  def files_enumerator
     extension_names.map do |extension|
-      file_path = "#{support_path}/files/example.#{extension}"
+      file_path = "#{Support.support_path}/files/example.#{extension}"
       Poleica::File.new(file_path)
     end.to_enum
-  end
-
-  def support_path
-    @support_path ||= File.expand_path('../support', __FILE__)
   end
 
   def extension_names
     EXTENSION_NAMES
   end
-end
+end # class TypeableTest
