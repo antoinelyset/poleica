@@ -36,7 +36,7 @@ class TypeableTest < Minitest::Test
 
   def test_that_it_returns_null_type_by_default
     mp3_path = "#{Support.support_path}/files/example.mp3"
-    type_class = Poleica::File.new(mp3_path).file_type.class
+    type_class = Poleica::Polei.new(mp3_path).file_type.class
     assert_equal(type_class, Poleica::Types::Null)
   end
 
@@ -45,7 +45,7 @@ class TypeableTest < Minitest::Test
   def files_enumerator
     extension_names.map do |extension|
       file_path = "#{Support.support_path}/files/example.#{extension}"
-      Poleica::File.new(file_path)
+      Poleica::Polei.new(file_path)
     end.to_enum
   end
 

@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 module Poleica
-  class File
+  class Polei
     include Poleica::Typeable
     include Poleica::Convertible
 
@@ -13,5 +13,5 @@ module Poleica
     def name
       File.basename(path, File.extname(path))
     end
-  end # class File
+  end # class Polei
 end # module Poleica
