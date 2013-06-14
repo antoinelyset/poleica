@@ -14,7 +14,9 @@ polei.to_png
 
 
 ## Concept
+
 _ -> PDF -> Image
+
 Image    -> Image
 
 ```
@@ -48,4 +50,4 @@ Poleica.new(file_path).to_png(width: 400, weight: 400)
 
 ## Thanks
 
-- Webkit for their Mimetype test files
+- A lot of inspiration from a lot of gems
