@@ -1,3 +1,13 @@
+# /!\ DRAFT VERSION NOT ALL YET IMPLEMENTED /!\
+
+Usage :
+
+```
+polei = Poleica.new('test/support/files/1px.gif')
+polei.to_png
+=> "test/support/files/1px-b4491705564909da7f9eaf749dbbfbb1.png"
+```
+
 # Poleica
 ## Opinionated ( <3 this word) thumbnail generator, heavily inspired by Docsplit
 ### Poleica = Polaroid + Leica (Real Hipster)

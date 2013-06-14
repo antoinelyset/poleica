@@ -1,7 +1,8 @@
 # -*- encoding: utf-8 -*-
 module Poleica
-  def self.new(file_or_io_path)
-    # Detect type -> Coerce -> Convert
+  def self.new(file_or_path)
+    file_or_path = file_or_path.path if file_or_path.respond_to?(:path)
+    Polei.new(file_or_path)
   end
 end # module Poleica
 
