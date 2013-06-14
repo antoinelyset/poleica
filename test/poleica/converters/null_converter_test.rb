@@ -16,4 +16,4 @@ class NullConverterTest < Minitest::Test
     converter = Poleica::Converters::NullConverter.new(file)
     assert_raises(NoMethodError) { converter.send(method_name) }
   end
-end
+end # class NullConverterTest
