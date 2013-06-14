@@ -1,15 +1,17 @@
 # -*- encoding: utf-8 -*-
 module Poleica
   module Converters
-    class NullConverter
+    class General
+
       attr_reader :polei
+
       def initialize(polei)
         @polei = polei
       end
 
-      def method_missing(method, *args, &block)
-        super unless method =~ /^to_/
+      def to_bin(options = {})
+        File.binread(polei.path)
       end
-    end # class NullConverter
+    end # class General
   end # module Converters
 end # module Poleica

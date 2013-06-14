@@ -8,21 +8,28 @@ module Poleica
       Converters::GraphicsMagick
     ]
 
-    def convert_to_format(format)
-      converter_for_format(format).new(self).send("to_#{format}".to_sym)
+    def method_missing(method, *args, &block)
+      extension = method.to_s.split(/^to_(.*)/)[1]
+      return convert_to_extension(extension) if extension
+      super
     end
 
-    def converter_to_format(format, filter = :mimetype)
-      converters = self.send("compatible_converters_by_#{filter}".to_sym)
-      compatible_converter = converters.find do |converter|
+    def convert_to_extension(extension, options = {})
+      converter = converter_to_extension(extension).new(self)
+      converter.send("to_#{extension}".to_sym, options)
+    end
+
+    def converter_to_extension(extension, filter = :mimetype)
+      compatible_converter = compatible_converters.find do |converter|
         converter_methods  = converter.instance_methods(false).map(&:to_s)
-        converter_methods.include?("to_#{format}")
+        converter_methods.include?("to_#{extension}")
       end
-      compatible_converter ||= NullConverter
+      compatible_converter ||= Converters::NullConverter
     end
 
     def compatible_converters
-      compatible_converters_by_mimetype | compatible_converters_by_extension
+      (compatible_converters_by_mimetype |
+        compatible_converters_by_extension) << Converters::General
     end
 
     def compatible_converters_by_mimetype

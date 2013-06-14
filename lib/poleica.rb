@@ -12,8 +12,10 @@ require 'poleica/types/image'
 require 'poleica/types/document'
 require 'poleica/types/typeable'
 
-require 'poleica/converters/graphics_magick'
+require 'poleica/converters/utils'
+require 'poleica/converters/general'
 require 'poleica/converters/null_converter'
+require 'poleica/converters/graphics_magick'
 require 'poleica/converters/convertible'
 
 require 'poleica/polei'

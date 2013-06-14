@@ -8,8 +8,8 @@ _ -> PDF -> Image
 Image    -> Image
 
 ```
-Poleica.new(file_path).convert_to(:png)
-Poleica.new(file_path).convert_to(:png, width: 400, weight: 400)
+Poleica.new(file_path).to_png
+Poleica.new(file_path).to_png(width: 400, weight: 400)
 ```
 
 

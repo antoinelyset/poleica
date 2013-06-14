@@ -5,11 +5,13 @@ source 'https://rubygems.org'
 gemspec
 
 group :test do
+  gem 'minitest'
   gem 'coveralls', require: false
 end
 
 group :development do
-  gem 'minitest'
+  gem 'pry-plus'
+
   gem 'rubocop', :github => 'bbatsov/rubocop'
 
   # Guards
