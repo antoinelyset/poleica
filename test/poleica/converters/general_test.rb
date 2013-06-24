@@ -1,8 +1,7 @@
 # -*- encoding: utf-8 -*-
 require 'test_helper'
-
+# Test the General Converter Module
 class GeneralTest < Minitest::Test
-
   def test_to_bin
     gif_path = "#{Support.support_path}/files/1px.gif"
     gif_data = File.binread(gif_path)

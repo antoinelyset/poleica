@@ -10,7 +10,7 @@ group :test do
 end
 
 group :development do
-  gem 'pry-plus'
+  gem 'pry-plus', require: 'pry'
 
   gem 'rubocop', :github => 'bbatsov/rubocop'
 

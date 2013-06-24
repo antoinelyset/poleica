@@ -1,6 +1,7 @@
 # -*- encoding: utf-8 -*-
 module Poleica
   module Types
+    # Document Type
     class Document
       COMPATIBLE_MIMETYPES = [
         'application/vnd.oasis.opendocument.text', # .odt

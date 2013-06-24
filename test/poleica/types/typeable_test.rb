@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 require 'test_helper'
-
+# Test the Typeable Module
 class TypeableTest < Minitest::Test
   EXTENSION_NAMES ||= %w{doc pdf mp3 png}
 

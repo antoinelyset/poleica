@@ -1,8 +1,7 @@
 # -*- encoding: utf-8 -*-
 require 'test_helper'
-
+# Test the GraphicsMagick Converter Module
 class GraphicsMagickTest < Minitest::Test
-
   def test_to_png
     pdf_polei = Poleica::Polei.new("#{Support.support_path}/files/example.pdf")
     data   = File.read(pdf_polei.path)

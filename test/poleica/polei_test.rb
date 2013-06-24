@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 require 'test_helper'
-
+# Test the Polei Class
 class PoleiTest < Minitest::Test
   def test_it_returns_name
     file = Poleica::Polei.new("#{Support.support_path}/example.mp3")

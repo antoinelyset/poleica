@@ -3,13 +3,14 @@ require 'digest/md5'
 
 module Poleica
   module Converters
+    # An Utility module for the converters
     module Utils
       def path_for_extension(extension)
         "#{path_without_extension}.#{extension}"
       end
 
       def path_without_extension
-        File.join(File.dirname(polei.path), File.basename(polei.path,".*"))
+        File.join(File.dirname(polei.path), File.basename(polei.path, '.*'))
       end
 
       def path_with_md5_for_extention(extension)

@@ -1,5 +1,6 @@
 # -*- encoding: utf-8 -*-
 module Poleica
+  # Strange name for a simple object, it represents a File
   class Polei
     include Poleica::Typeable
     include Poleica::Convertible

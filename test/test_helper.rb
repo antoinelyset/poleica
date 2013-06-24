@@ -8,9 +8,10 @@ end
 gem     'minitest'
 require 'minitest/autorun'
 require 'poleica'
-
+# The Support Module contains support methods for the tests
 module Support
-  def self.support_path
+  module_function
+  def support_path
     @support_path ||= File.expand_path('../support', __FILE__)
   end
 end

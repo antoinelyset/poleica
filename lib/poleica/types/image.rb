@@ -1,6 +1,7 @@
 # -*- encoding: utf-8 -*-
 module Poleica
   module Types
+    # Image Type
     class Image
       COMPATIBLE_MIMETYPES = [
         'image/x-portable-pixmap', # .ppm, .pgm, .pbm, .pnm

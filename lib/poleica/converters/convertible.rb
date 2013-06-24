@@ -1,5 +1,7 @@
 # -*- encoding: utf-8 -*-
 module Poleica
+  # Given a file and a method e.g : example.jpeg, to_png it searches for
+  # compatible converters and calls it.
   module Convertible
 
     private

@@ -1,6 +1,8 @@
 # -*- encoding: utf-8 -*-
 module Poleica
   module Converters
+    # The GraphicsMagick converter, use the 'gm' command to convert images and
+    # documents
     class GraphicsMagick
       include Poleica::Converters::Utils
 
@@ -33,17 +35,45 @@ module Poleica
         pdf
       }
 
+      COMPATIBLE_CONVERTING_EXTENSIONS = %w{
+        png
+        pdf
+        jpeg
+      }
+
       attr_reader :polei
 
       def initialize(polei)
         @polei = polei
       end
 
-      def to_png(options = {})
-        converted_file_path = path_with_md5_for_extention(:png)
-        `gm convert #{polei.path} #{converted_file_path}`
-        File.exists?(converted_file_path) ? converted_file_path : nil
+      # Meta-programmatically defines a to_#{extension} (e.g: to_png) for each
+      # COMPATIBLE_CONVERTING_EXTENSIONS
+      COMPATIBLE_CONVERTING_EXTENSIONS.each do |extension|
+        define_method("to_#{extension}".to_sym) do |options|
+          converted_file_path = path_with_md5_for_extention(extension.to_sym)
+          `gm convert #{polei.path} #{converted_file_path}`
+          File.exists?(converted_file_path) ? converted_file_path : nil
+        end
       end
+
+      # def to_png(options = {})
+      #   converted_file_path = path_with_md5_for_extention(:png)
+      #   `gm convert #{polei.path} #{converted_file_path}`
+      #   File.exists?(converted_file_path) ? converted_file_path : nil
+      # end
+
+      # def to_pdf(options = {})
+      #   converted_file_path = path_with_md5_for_extention(:pdf)
+      #   `gm convert #{polei.path} #{converted_file_path}`
+      #   File.exists?(converted_file_path) ? converted_file_path : nil
+      # end
+
+      # def to_jpeg(options = {})
+      #   converted_file_path = path_with_md5_for_extention(:jpeg)
+      #   `gm convert #{polei.path} #{converted_file_path}`
+      #   File.exists?(converted_file_path) ? converted_file_path : nil
+      # end
     end # class GraphicsMagick
   end # module Converters
 end # module Poleica

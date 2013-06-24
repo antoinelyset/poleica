@@ -1,8 +1,7 @@
 # -*- encoding: utf-8 -*-
 module Poleica
-
   # Retrieve the mimetype, the extension and the type of a file, it needs a
-  # path method
+  # "path" method
   module Typeable
     def file_extension
       @file_extension ||= extract_extension
