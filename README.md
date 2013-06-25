@@ -1,5 +1,9 @@
 # /!\ DRAFT VERSION NOT ALL YET IMPLEMENTED /!\
 
+[![Coverage Status](https://coveralls.io/repos/antoinelyset/Poleica/badge.png)](https://coveralls.io/r/antoinelyset/Poleica)
+[![Code Climate](https://codeclimate.com/github/antoinelyset/Poleica.png)](https://codeclimate.com/github/antoinelyset/Poleica)
+[![Dependency Status](https://gemnasium.com/antoinelyset/Poleica.png)](https://gemnasium.com/antoinelyset/Poleica)
+
 Usage :
 
 ```
@@ -8,9 +12,9 @@ polei.to_png
 => "test/support/files/1px-b4491705564909da7f9eaf749dbbfbb1.png"
 ```
 
+
 # Poleica
-## Opinionated ( <3 this word) thumbnail generator, heavily inspired by Docsplit
-### Poleica = Polaroid + Leica (Real Hipster)
+## Poleica = Polaroid + Leica (Real Hipster)
 
 
 ## Concept
