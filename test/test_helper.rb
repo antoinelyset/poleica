@@ -1,5 +1,5 @@
 # -*- encoding: utf-8 -*-
-if ENV['COVERAGE'] || ENV['TRAVIS']
+if ENV['COVERAGE'] || ENV['TRAVIS']
   require 'coveralls'
   Coveralls.wear!
   SimpleCov.formatter = SimpleCov::Formatter::HTMLFormatter
