@@ -1,5 +1,6 @@
 # /!\ DRAFT VERSION NOT ALL YET IMPLEMENTED /!\
 
+[![Build Status](https://travis-ci.org/antoinelyset/Poleica.png?branch=master)](https://travis-ci.org/antoinelyset/Poleica)
 [![Coverage Status](https://coveralls.io/repos/antoinelyset/Poleica/badge.png)](https://coveralls.io/r/antoinelyset/Poleica)
 [![Code Climate](https://codeclimate.com/github/antoinelyset/Poleica.png)](https://codeclimate.com/github/antoinelyset/Poleica)
 [![Dependency Status](https://gemnasium.com/antoinelyset/Poleica.png)](https://gemnasium.com/antoinelyset/Poleica)
