@@ -56,24 +56,6 @@ module Poleica
           File.exists?(converted_file_path) ? converted_file_path : nil
         end
       end
-
-      # def to_png(options = {})
-      #   converted_file_path = path_with_md5_for_extention(:png)
-      #   `gm convert #{polei.path} #{converted_file_path}`
-      #   File.exists?(converted_file_path) ? converted_file_path : nil
-      # end
-
-      # def to_pdf(options = {})
-      #   converted_file_path = path_with_md5_for_extention(:pdf)
-      #   `gm convert #{polei.path} #{converted_file_path}`
-      #   File.exists?(converted_file_path) ? converted_file_path : nil
-      # end
-
-      # def to_jpeg(options = {})
-      #   converted_file_path = path_with_md5_for_extention(:jpeg)
-      #   `gm convert #{polei.path} #{converted_file_path}`
-      #   File.exists?(converted_file_path) ? converted_file_path : nil
-      # end
     end # class GraphicsMagick
   end # module Converters
 end # module Poleica
