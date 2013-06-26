@@ -3,7 +3,7 @@ require 'test_helper'
 # Test the Polei Class
 class PoleiTest < Minitest::Test
   def test_it_returns_name
-    file = Poleica::Polei.new("#{Support.support_path}/example.mp3")
-    assert_equal('example', file.name)
+    polei = Poleica::Polei.new("#{Support.support_path}/example.mp3")
+    assert_equal('example', polei.name)
   end
 end # class PoleiTest

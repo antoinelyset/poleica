@@ -18,7 +18,7 @@ class GraphicsMagickTest < Minitest::Test
 
   def test_to_png_create_a_file
     returned_path = pdf_polei.to_png
-    assert(File.exists?(returned_path))
+    assert(returned_path && File.exists?(returned_path))
     clean_png_file
   end
 
