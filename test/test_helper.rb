@@ -1,8 +1,12 @@
 # -*- encoding: utf-8 -*-
 if ENV['COVERAGE'] || ENV['TRAVIS']
   require 'coveralls'
-  Coveralls.wear!
-  SimpleCov.formatter = SimpleCov::Formatter::HTMLFormatter
+  require 'simplecov'
+
+  SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
+    SimpleCov::Formatter::HTMLFormatter,
+    Coveralls::SimpleCov::Formatter
+  ]
 end
 
 gem     'minitest'
