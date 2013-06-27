@@ -11,7 +11,7 @@ group :test do
 end
 
 group :development do
-  gem 'pry-plus', require: 'pry'
+  gem 'jazz_hands'
 
   # Guards
   gem 'guard-rubocop'

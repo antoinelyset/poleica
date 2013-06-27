@@ -6,6 +6,11 @@ module Poleica
     class GraphicsMagick
       include Poleica::Converters::Utils
 
+      BIN_PATHS = {
+        linux:  '/usr/bin/gm',
+        mac: '/usr/local/Cellar/graphicsmagick/1.3.18/bin/gm'
+      }
+
       COMPATIBLE_MIMETYPES = %w{
         image/x-portable-bitmap
         application/postscript
@@ -47,13 +52,42 @@ module Poleica
         @polei = polei
       end
 
-      # Meta-programmatically defines a to_#{extension} (e.g: to_png) for each
-      # COMPATIBLE_CONVERTING_EXTENSIONS
-      COMPATIBLE_CONVERTING_EXTENSIONS.each do |extension|
-        define_method("to_#{extension}".to_sym) do |options|
-          converted_file_path = path_with_md5_for_extention(extension.to_sym)
-          `gm convert #{polei.path} #{converted_file_path}`
-          File.exists?(converted_file_path) ? converted_file_path : nil
+      def to_png(options = {})
+        opts_gen = OptionsGenerator.new(options)
+        converted_file_path = path_with_md5_for_extention(:png)
+        cmd = "#{bin_path} convert "
+        cmd << "#{polei.path}#{opts_gen.generate} "
+        cmd << "#{converted_file_path}"
+        `#{cmd}`
+        File.exists?(converted_file_path) ? converted_file_path : nil
+      end
+
+      def bin_path
+        path = BIN_PATHS[host_os] || BIN_PATHS[:linux]
+        raise "GraphicsMagick not found @ #{path}" unless File.exists?(path)
+        path
+      end
+
+      private
+
+      # Generate options for the gm command
+      class OptionsGenerator
+        attr_reader :options
+
+        def initialize(options = {})
+          defaults = { page: 0 }
+          @options = defaults.merge(options)
+        end
+
+        def generate
+          "#{pages_options}"
+        end
+
+        private
+
+        def pages_options
+          @pages_options ||= Array(options[:page]).
+            flatten.compact.uniq.sort.to_s
         end
       end
     end # class GraphicsMagick
