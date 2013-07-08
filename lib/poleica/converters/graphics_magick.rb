@@ -89,7 +89,7 @@ module Poleica
           @pages_options ||= Array(options[:page]).
             flatten.compact.uniq.sort.to_s
         end
-      end
+      end # class OptionsGenerator
     end # class GraphicsMagick
   end # module Converters
 end # module Poleica
