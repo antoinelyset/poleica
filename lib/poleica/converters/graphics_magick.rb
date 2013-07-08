@@ -71,6 +71,7 @@ module Poleica
       private
 
       # Generate options for the gm command
+      # @options page [Array, Integer]
       class OptionsGenerator
         attr_reader :options
 
