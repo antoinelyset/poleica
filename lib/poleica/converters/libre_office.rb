@@ -1,4 +1,6 @@
 # -*- encoding: utf-8 -*-
+require 'fileutils'
+
 module Poleica
   module Converters
     # The LibreOffice converter, use the 'soffice' command to convert documents
