@@ -17,6 +17,7 @@ require 'poleica/converters/utils'
 require 'poleica/converters/general'
 require 'poleica/converters/null_converter'
 require 'poleica/converters/graphics_magick'
+require 'poleica/converters/libre_office'
 require 'poleica/converters/convertible'
 
 require 'poleica/polei'

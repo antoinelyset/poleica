@@ -67,8 +67,8 @@ module Poleica
       # just a directory
       # @return tempfile [File]
       def temp_file
-        @temp_path ||= path_with_md5_for_extension(polei.extension)
-        return @temp_path if File.exists?(@temp_path)
+        @temp_path ||= path_with_md5_for_extension(polei.file_extension)
+        return File.new(@temp_path) if File.exists?(@temp_path)
         FileUtils.cp(polei.path, @temp_path)
         File.new(@temp_path)
       end
@@ -78,6 +78,7 @@ module Poleica
         attr_reader :options, :format
 
         def initialize(options = {}, format = :pdf)
+          defaults = {}
           @options = defaults.merge(options)
           @format  = format
         end

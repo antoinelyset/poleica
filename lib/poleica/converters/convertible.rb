@@ -7,7 +7,8 @@ module Poleica
     private
 
     CONVERTERS = [
-      Converters::GraphicsMagick
+      Converters::GraphicsMagick,
+      Converters::LibreOffice
     ]
 
     def method_missing(method, *args, &block)
