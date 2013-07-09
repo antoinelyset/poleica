@@ -54,12 +54,12 @@ module Poleica
 
       def to_png(options = {})
         opts_gen = OptionsGenerator.new(options)
-        converted_file_path = path_with_md5_for_extension(:png)
+        output_file_path = path_with_md5_for_extension(:png)
         cmd = "#{bin_path} convert "
         cmd << "#{polei.path}#{opts_gen.generate} "
-        cmd << "#{converted_file_path}"
+        cmd << "#{output_file_path}"
         `#{cmd}`
-        File.exists?(converted_file_path) ? converted_file_path : nil
+        File.exists?(output_file_path) ? output_file_path : nil
       end
 
       def bin_path
