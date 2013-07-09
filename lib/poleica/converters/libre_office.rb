@@ -52,7 +52,7 @@ module Poleica
         `#{cmd}`
         File.exists?(output_file_path) ? output_file_path : nil
       ensure
-        FileUtils.rm(temp_file.path, force: true)
+        File.delete(temp_file.path) if File.exists?(temp_file.path)
       end
 
       def bin_path
