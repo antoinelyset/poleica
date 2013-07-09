@@ -7,7 +7,7 @@ rvm:
   - jruby-19mode
 before_script:
   - sudo apt-get update -qq
-  - sudo apt-get install -qq graphicsmagick libreoffice-common
+  - sudo apt-get install -qq graphicsmagick libreoffice
 script:
   - rake test
   - rubocop
