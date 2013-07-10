@@ -25,7 +25,7 @@ module Poleica
       def to_pdf(options = {})
         opts_gen         = OptionsGenerator.new(options, :pdf)
         output_dir_path  = File.dirname(polei.path)
-        output_file_path = path_with_md5_for_extension(:pdf)
+        output_file_path = polei.path_with_md5_for_extension(:pdf)
         cmd  = "#{bin_path} #{opts_gen.generate} "
         cmd << "--outdir #{output_dir_path} "
         cmd << "#{temp_file.path}"
@@ -47,7 +47,7 @@ module Poleica
       # just a directory
       # @return tempfile [File]
       def temp_file
-        @temp_path ||= path_with_md5_for_extension(polei.file_extension)
+        @temp_path ||= polei.path_with_md5_for_extension(polei.file_extension)
         return File.new(@temp_path) if File.exists?(@temp_path)
         FileUtils.cp(polei.path, @temp_path)
         File.new(@temp_path)

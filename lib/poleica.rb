@@ -21,4 +21,6 @@ require 'poleica/converters/graphics_magick'
 require 'poleica/converters/libre_office'
 require 'poleica/converters/convertible'
 
+require 'poleica/pathable'
+
 require 'poleica/polei'

@@ -24,7 +24,7 @@ module Poleica
 
       def to_png(options = {})
         opts_gen = OptionsGenerator.new(options)
-        output_file_path = path_with_md5_for_extension(:png)
+        output_file_path = polei.path_with_md5_for_extension(:png)
         cmd = "#{bin_path} convert "
         cmd << "#{polei.path}#{opts_gen.generate} "
         cmd << "#{output_file_path}"
