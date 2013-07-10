@@ -8,43 +8,13 @@ module Poleica
 
       BIN_PATHS = {
         linux:  '/usr/bin/gm',
-        osx: '/usr/local/Cellar/graphicsmagick/1.3.18/bin/gm'
+        osx:    '/usr/local/Cellar/graphicsmagick/1.3.18/bin/gm'
       }
 
-      COMPATIBLE_MIMETYPES = %w{
-        image/x-portable-bitmap
-        application/postscript
-        image/x-portable-pixma
-        application/pdf
-        image/x-ms-bmp
-        image/svg+xml
-        image/jpeg
-        image/tiff
-        image/gif
-        image/png
-      }
-
-      COMPATIBLE_EXTENSIONS = %w{
-        tiff
-        jpeg
-        ppm
-        pgm
-        pnm
-        pbm
-        bmp
-        svg
-        jpg
-        tif
-        gif
-        png
-        pdf
-      }
-
-      COMPATIBLE_CONVERTING_EXTENSIONS = %w{
-        png
-        pdf
-        jpeg
-      }
+     COMPATIBLE_TYPES = [
+       Types::Image,
+       Types::PDF
+     ]
 
       attr_reader :polei
 

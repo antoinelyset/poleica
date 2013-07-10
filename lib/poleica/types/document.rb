@@ -9,7 +9,6 @@ module Poleica
         'application/vnd.ms-excel',                # .xls
         'application/vnd.ms-office',               # .ppt, .pps
         'application/msword',                      # .doc
-        'application/pdf',                         # .pdf
         'text/html',                               # .html, .htm
         'text/plain',                              # .txt
         'text/rtf'                                 # .rft
@@ -24,7 +23,6 @@ module Poleica
         ppt
         pps
         doc
-        pdf
         txt
         rft
       }

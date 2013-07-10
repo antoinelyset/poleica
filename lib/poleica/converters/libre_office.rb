@@ -12,31 +12,9 @@ module Poleica
         osx: '/Applications/LibreOffice.app/Contents/MacOS/soffice'
       }
 
-      COMPATIBLE_MIMETYPES = [
-        'application/vnd.oasis.opendocument.text', # .odt
-        'application/vnd.ms-office',               # .doc
-        'application/vnd.ms-excel',                # .xls
-        'application/vnd.ms-office',               # .ppt, .pps
-        'application/msword',                      # .doc
-        'application/pdf',                         # .pdf
-        'text/html',                               # .html, .htm
-        'text/plain',                              # .txt
-        'text/rtf'                                 # .rft
+      COMPATIBLE_TYPES = [
+        Types::Document
       ]
-
-      COMPATIBLE_EXTENSIONS = %w{
-        html
-        htm
-        odt
-        doc
-        xls
-        ppt
-        pps
-        doc
-        pdf
-        txt
-        rft
-      }
 
       attr_reader :polei
 

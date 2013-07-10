@@ -31,19 +31,12 @@ module Poleica
     end
 
     def compatible_converters
-      (compatible_converters_by_mimetype |
-        compatible_converters_by_extension) << Converters::General
+      compatible_converters_by_type << Converters::General
     end
 
-    def compatible_converters_by_mimetype
+    def compatible_converters_by_type
       CONVERTERS.select do |converter|
-        converter::COMPATIBLE_MIMETYPES.include?(file_mimetype)
-      end
-    end
-
-    def compatible_converters_by_extension
-      CONVERTERS.select do |converter|
-        converter::COMPATIBLE_EXTENSIONS.include?(file_extension)
+        converter::COMPATIBLE_TYPES.include?(file_type.class)
       end
     end
   end # module Convertible

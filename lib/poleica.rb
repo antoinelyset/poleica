@@ -8,6 +8,7 @@ end # module Poleica
 
 require 'poleica/version'
 
+require 'poleica/types/pdf'
 require 'poleica/types/null'
 require 'poleica/types/image'
 require 'poleica/types/document'

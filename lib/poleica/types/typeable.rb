@@ -23,7 +23,8 @@ module Poleica
 
     TYPES = [
       Types::Image,
-      Types::Document
+      Types::Document,
+      Types::PDF
     ]
 
     def extract_mimetype
