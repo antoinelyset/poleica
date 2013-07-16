@@ -1,0 +1,55 @@
+# -*- encoding: utf-8 -*-
+require 'test_helper'
+# Test the Coercive Converter Module
+class CoerciveTest < Minitest::Test
+
+  DOC_PATH = "#{Support.support_path}/files/example.doc"
+
+  def test_find_next_converter_by_method
+    conv_hash = coercive_conv.send(:find_next_converter_by_method, :to_png)
+    assert_equal({ to_pdf: Poleica::Converters::GraphicsMagick }, conv_hash)
+  end
+
+  def test_next_converters_by_method
+    next_convs     = coercive_conv.send(:next_converters_by_method)
+    expected_convs = [{ to_pdf: Poleica::Converters::GraphicsMagick }]
+    assert_equal(expected_convs, next_convs)
+  end
+
+  def test_try_convert_intermediary_file_creation
+    coercive_conv.send(:try_convert, :to_png)
+    assert(File.exists?(expected_pdf_path))
+    clean_png_file
+    clean_pdf_file
+  end
+
+  def test_try_convert_file_creation
+    coercive_conv.send(:try_convert, :to_png)
+    assert(File.exists?(expected_png_path))
+    clean_png_file
+    clean_pdf_file
+  end
+
+  private
+
+  def clean_pdf_file
+    File.exists?(expected_pdf_path) && File.delete(expected_pdf_path)
+  end
+
+  def clean_png_file
+    File.exists?(expected_png_path) && File.delete(expected_png_path)
+  end
+
+  def expected_pdf_path
+    Support.expected_converted_path(DOC_PATH, :pdf)
+  end
+
+  def expected_png_path
+    Support.expected_converted_path(expected_pdf_path, :png)
+  end
+
+  def coercive_conv
+    doc_polei = Poleica::Polei.new("#{DOC_PATH}")
+    Poleica::Converters::Coercive.new(doc_polei)
+  end
+end # class CoerciveTest

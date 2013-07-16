@@ -35,12 +35,6 @@ module Poleica
         File.delete(temp_file.path) if File.exists?(temp_file.path)
       end
 
-      def bin_path
-        path = BIN_PATHS[host_os] || BIN_PATHS[:linux]
-        raise "LibreOffice not found @ #{path}" unless File.exists?(path)
-        path
-      end
-
       private
 
       # Create a temp file, libreoffice doesn't accept a full output path,

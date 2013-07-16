@@ -32,12 +32,6 @@ module Poleica
         File.exists?(output_file_path) ? output_file_path : nil
       end
 
-      def bin_path
-        path = BIN_PATHS[host_os] || BIN_PATHS[:linux]
-        raise "GraphicsMagick not found @ #{path}" unless File.exists?(path)
-        path
-      end
-
       private
 
       # Generate options for the gm command

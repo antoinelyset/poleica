@@ -21,13 +21,18 @@ module Support
     @support_path ||= File.expand_path('../support', __FILE__)
   end
 
+  def path_without_extension(path)
+    File.join(File.dirname(path), File.basename(path, '.*'))
+  end
+
   def expected_converted_path(
     original_file_path  = "#{Support.support_path}/files/example.pdf",
     converted_extension = :png
-    )
+  )
     data   = File.read(original_file_path)
     md5    = Digest::MD5.new
     digest = md5.hexdigest(data)
-    "#{Support.support_path}/files/example-#{digest}.#{converted_extension}"
+    path_without_extension(original_file_path) +
+      "-#{digest}.#{converted_extension}"
   end
 end

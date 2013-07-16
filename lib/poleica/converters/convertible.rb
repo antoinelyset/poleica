@@ -1,10 +1,7 @@
 # -*- encoding: utf-8 -*-
 module Poleica
-  # Given a file and a method e.g : example.jpeg, to_png it searches for
-  # compatible converters and calls it.
+  # Conversion Logic, given a type it can search for compatible converters
   module Convertible
-
-    private
 
     CONVERTERS = [
       Converters::GraphicsMagick,
@@ -12,8 +9,10 @@ module Poleica
     ]
 
     def method_missing(method, *args, &block)
-      extension = method.to_s.split(/^to_(.*)/)[1]
-      return convert_to_extension(extension) if extension
+      extension  = method.to_s.split(/^to_(.*)/)[1]
+      options    = args.last if args.last.is_a?(Hash)
+      options    ||= {}
+      return convert_to_extension(extension, options) if extension
       super
     end
 
@@ -24,20 +23,40 @@ module Poleica
 
     def converter_to_extension(extension, filter = :mimetype)
       compatible_converter = compatible_converters.find do |converter|
-        converter_methods  = converter.instance_methods(false).map(&:to_s)
+        converter_methods  = convert_methods_for_converter(converter)
         converter_methods.include?("to_#{extension}")
       end
-      compatible_converter ||= Converters::NullConverter
+      compatible_converter ||= Converters::Coercive
     end
 
     def compatible_converters
-      compatible_converters_by_type << Converters::General
+      @compatible_converters ||=
+        compatible_converters_by_type(self.file_type.class) <<
+         Converters::General
     end
 
-    def compatible_converters_by_type
+    def compatible_convert_methods
+      @compatible_convert_methods ||=
+        compatible_converters.map do |c|
+          convert_methods_for_converter(c)
+        end.flatten
+    end
+
+    module_function
+
+    def compatible_converters_by_type(type)
       CONVERTERS.select do |converter|
-        converter::COMPATIBLE_TYPES.include?(file_type.class)
+        converter::COMPATIBLE_TYPES.include?(type)
       end
     end
+
+    def convert_methods_for_converter(converter)
+      methods_for_converter(converter).reject { |m| !(m =~ /^to_(.*)/) }
+    end
+
+    def methods_for_converter(converter)
+      converter.instance_methods(false).map(&:to_s)
+    end
+
   end # module Convertible
 end # module Poleica

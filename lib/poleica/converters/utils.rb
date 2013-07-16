@@ -22,6 +22,14 @@ module Poleica
       def host_os
         [:windows, :osx, :linux].find { |os| self.send(:"#{os}?") }
       end
+
+      def bin_path
+        bin_path_key = :BIN_PATHS # rubocop:disable SymbolName
+        bin_paths    = self.class.const_get(bin_path_key)
+        path         = bin_paths[host_os] || bin_paths[:linux]
+        raise "#{self.class} not found @ #{path}" unless File.exists?(path)
+        path
+      end
     end
   end
 end
