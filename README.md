@@ -56,3 +56,8 @@ Poleica.new(file_path).to_png(width: 400, weight: 400)
 ## Thanks
 
 - A lot of inspiration from a lot of gems
+
+## License
+
+Poleica is released under the [MIT
+License](http://www.opensource.org/licenses/MIT)
