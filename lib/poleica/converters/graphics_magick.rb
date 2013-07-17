@@ -8,7 +8,7 @@ module Poleica
 
       BIN_PATHS = {
         linux:  '/usr/bin/gm',
-        osx:    '/usr/local/Cellar/graphicsmagick/1.3.18/bin/gm'
+        osx:    '/usr/local/bin/gm'
       }
 
      COMPATIBLE_TYPES = [
