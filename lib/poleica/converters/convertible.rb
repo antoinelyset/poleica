@@ -23,8 +23,7 @@ module Poleica
 
     def converter_to_extension(extension, filter = :mimetype)
       compatible_converter = compatible_converters.find do |converter|
-        converter_methods  = convert_methods_for_converter(converter)
-        converter_methods.include?("to_#{extension}")
+        converter.method_defined?(:"to_#{extension}")
       end
       compatible_converter ||= Converters::Coercive
     end

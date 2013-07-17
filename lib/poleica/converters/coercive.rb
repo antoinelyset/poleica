@@ -34,8 +34,7 @@ module Poleica
       def find_next_converter_by_method(origin_method)
         next_converters_by_method.find do |converter_by_method|
           conv = converter_by_method.values.first
-          methods = Poleica::Convertible.convert_methods_for_converter(conv)
-          methods.include?(origin_method.to_s)
+          conv.method_defined?(origin_method.to_sym)
         end
       end
 
