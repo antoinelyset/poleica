@@ -45,7 +45,9 @@ module Poleica
         end
 
         def generate
-          "#{pages_options}"
+          options = "#{pages_options} "
+          options << "-resize #{resize_options} " if resize_options
+          options
         end
 
         private
@@ -53,6 +55,12 @@ module Poleica
         def pages_options
           @pages_options ||= Array(options[:page]).
             flatten.compact.uniq.sort.to_s
+        end
+
+        def resize_options
+          return nil unless @resize_options ||
+            options[:height] || options[:width]
+          @resize_options = "#{options[:width]}x#{options[:height]}"
         end
       end # class OptionsGenerator
     end # class GraphicsMagick
