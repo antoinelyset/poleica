@@ -22,6 +22,23 @@ class LibreOfficeTest < Minitest::Test
     clean_pdf_file
   end
 
+  def test_path_options
+    path_option   = "#{Support.support_path}/files/path_test.pdf"
+    returned_path = doc_polei.to_pdf(path: path_option)
+    assert(File.exists?(path_option))
+    assert(returned_path)
+    assert(File.exists?(returned_path))
+    File.delete(path_option) if File.exists?(path_option)
+  end
+
+  def test_path_folder
+    path_option = '/tmp/'
+    returned_path = doc_polei.to_pdf(path: path_option)
+    assert(File.exists?(path_option))
+    assert(returned_path)
+    assert(File.exists?(returned_path))
+  end
+
   private
 
   def clean_pdf_file

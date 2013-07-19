@@ -23,48 +23,74 @@ module Poleica
       end
 
       def to_pdf(options = {})
-        opts_gen         = OptionsGenerator.new(options, :pdf)
-        output_dir_path  = File.dirname(polei.path)
-        output_file_path = polei.path_with_md5_for_extension(:pdf)
-        cmd  = "#{bin_path} #{opts_gen.generate} "
-        cmd << "--outdir #{output_dir_path} "
-        cmd << "#{temp_file.path}"
+        opts_gen = OptionsGenerator.new(polei, options, :pdf)
+        cmd      = "#{bin_path} #{opts_gen.generate}"
         `#{cmd}`
-        File.exists?(output_file_path) ? output_file_path : nil
+        expected_file_path = opts_gen[:path] || polei.path_with_md5(:pdf)
+        File.exists?(expected_file_path) ? expected_file_path : nil
       ensure
-        File.delete(temp_file.path) if File.exists?(temp_file.path)
+        temp_file_path = opts_gen.temp_path
+        File.delete(temp_file_path) if File.exists?(temp_file_path)
       end
 
       private
 
-      # Create a temp file, libreoffice doesn't accept a full output path,
-      # just a directory
-      # @return tempfile [File]
-      def temp_file
-        @temp_path ||= polei.path_with_md5_for_extension(polei.file_extension)
-        return File.new(@temp_path) if File.exists?(@temp_path)
-        FileUtils.cp(polei.path, @temp_path)
-        File.new(@temp_path)
-      end
-
       # Generate options for the soffice command
       class OptionsGenerator
-        attr_reader :options, :format
+        attr_reader :options, :format, :polei
 
-        def initialize(options = {}, format = :pdf)
+        def initialize(polei, options = {}, format = :pdf)
           defaults = {}
           @options = defaults.merge(options)
+          @polei   = polei
           @format  = format
         end
 
         def generate
-          "#{default_options} #{format}"
+          "#{default_options} #{format} #{output_options}"
+        end
+
+        def [](key)
+          options[key]
+        end
+
+        # Generate a temp path, and create the file this is needed in order to
+        # have the right filename, LibreOffice just copy the original filename
+        # in the choosen directory, it doesn't accept filename params.
+        # @return temp_path [String]
+        def temp_path
+          @temp_path ||= generate_temp_path
+          FileUtils.cp(polei.path, @temp_path) unless File.exists?(@temp_path)
+          @temp_path
         end
 
         private
 
+        def generate_temp_path
+          if options[:path]
+            if File.directory?(options[:path])
+              basename = File.basename(polei.path_with_md5)
+              return File.join(options[:path], basename)
+            end
+            extension = File.extname(polei.path)
+            return pathable_object.path_for_extension(extension[1..-1])
+          else
+            return polei.path_with_md5(polei.file_extension)
+          end
+        end
+
+        def pathable_object
+            pathable_object = Struct.new(:path).new(options[:path])
+            pathable_object.extend(Poleica::Pathable)
+        end
+
         def default_options
           '--headless --invisible --norestore --nolockcheck --convert-to'
+        end
+
+        def output_options
+          output_dir_path = File.dirname(temp_path)
+          "--outdir #{output_dir_path} #{temp_path}"
         end
 
         def pages_options

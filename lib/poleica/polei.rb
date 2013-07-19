@@ -14,7 +14,11 @@ module Poleica
     end
 
     def name
-      File.basename(path, File.extname(path))
+      File.basename(path, ".#{extension}")
+    end
+
+    def extension
+      File.extname(path)[1..-1]
     end
   end # class Polei
 end # module Poleica

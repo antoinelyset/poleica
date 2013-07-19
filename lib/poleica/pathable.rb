@@ -10,7 +10,7 @@ module Poleica
       File.join(File.dirname(self.path), File.basename(self.path, '.*'))
     end
 
-    def path_with_md5_for_extension(extension)
+    def path_with_md5(extension = self.extension)
       data   = File.read(self.path)
       md5    = Digest::MD5.new
       digest = md5.hexdigest(data)

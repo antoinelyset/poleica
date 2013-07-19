@@ -1,8 +1,8 @@
 # -*- encoding: utf-8 -*-
 require 'test_helper'
 # Test the Coercive Converter Module
-class CoerciveTest < Minitest::Test
 
+class CoerciveTest < Minitest::Test
   DOC_PATH = "#{Support.support_path}/files/example.doc"
 
   def test_find_next_converter_by_method
@@ -17,7 +17,7 @@ class CoerciveTest < Minitest::Test
   end
 
   def test_try_convert_intermediary_file_creation
-    coercive_conv.send(:try_convert, :to_png)
+    coercive_conv.send(:coerce, :to_png, {})
     assert(File.exists?(expected_pdf_path))
     clean_png_file
     clean_pdf_file
@@ -25,8 +25,8 @@ class CoerciveTest < Minitest::Test
 
   def test_try_convert_file_creation
     coercive_conv.send(:try_convert, :to_png)
-    assert(File.exists?(expected_png_path))
-    clean_png_file
+    assert(File.exists?(find_png_path))
+    clean_png_file(find_png_path)
     clean_pdf_file
   end
 
@@ -36,8 +36,8 @@ class CoerciveTest < Minitest::Test
     File.exists?(expected_pdf_path) && File.delete(expected_pdf_path)
   end
 
-  def clean_png_file
-    File.exists?(expected_png_path) && File.delete(expected_png_path)
+  def clean_png_file(png_path = expected_png_path)
+    File.exists?(png_path) && File.delete(png_path)
   end
 
   def expected_pdf_path
@@ -46,6 +46,15 @@ class CoerciveTest < Minitest::Test
 
   def expected_png_path
     Support.expected_converted_path(expected_pdf_path, :png)
+  end
+
+  # Find a the path of the converted png. It should be used when we
+  # don't have the intermediate file since we need to calculate its
+  # md5
+  def find_png_path
+    files = Dir["#{Support.support_path}/files/*"]
+    start_path = Support.path_without_extension(expected_pdf_path)
+    files.grep(/#{start_path}-\w+\.png$/).first
   end
 
   def coercive_conv

@@ -17,15 +17,22 @@ module Poleica
       end
 
       def try_convert(method, options = {})
-        conversion_hash   = find_next_converter_by_method(method)
-        conversion_hash ||= { method => Converters::Null }
-        next_method = conversion_hash.keys.first
-        next_path   = polei.send(next_method.to_sym)
-        return nil unless next_path
-        Poleica.new(next_path).send(method.to_sym, options)
+        coerced_path = coerce(method, options)
+        return nil unless coerced_path
+        converted_path = Poleica.new(coerced_path).send(method.to_sym, options)
+        File.delete(coerced_path)
+        converted_path
       end
 
       private
+
+      def coerce(method, options)
+        default_conversion_hash = { method => Converters::Null }
+        conversion_hash   = find_next_converter_by_method(method)
+        conversion_hash ||= default_conversion_hash
+        next_method       = conversion_hash.keys.first
+        polei.send(next_method.to_sym)
+      end
 
       # Find the next method and converter needed to execute
       # a given conversion
