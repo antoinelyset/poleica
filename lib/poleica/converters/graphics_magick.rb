@@ -23,13 +23,12 @@ module Poleica
       end
 
       def to_png(options = {})
-        opts_gen = OptionsGenerator.new(options)
-        output_file_path = polei.path_with_md5(:png)
+        opts_gen = OptionsGenerator.new(polei, options)
         cmd = "#{bin_path} convert "
         cmd << "#{polei.path}#{opts_gen.generate} "
-        cmd << "#{output_file_path}"
         `#{cmd}`
-        File.exists?(output_file_path) ? output_file_path : nil
+        expected_file_path = opts_gen[:path]
+        File.exists?(expected_file_path) ? expected_file_path : nil
       end
 
       private
@@ -37,17 +36,20 @@ module Poleica
       # Generate options for the gm command
       # @options page [Array, Integer]
       class OptionsGenerator
-        attr_reader :options
+        attr_reader :polei, :options
 
-        def initialize(options = {})
+        def initialize(polei, options = {})
+          @polei   = polei
           defaults = { page: 0 }
           @options = defaults.merge(options)
         end
 
         def generate
-          options = "#{pages_options} "
-          options << "-resize #{resize_options} " if resize_options
-          options
+          "#{pages_options} #{resize_options} #{output_options}"
+        end
+
+        def [](key)
+          options[key]
         end
 
         private
@@ -60,7 +62,20 @@ module Poleica
         def resize_options
           return nil unless @resize_options ||
             options[:height] || options[:width]
-          @resize_options = "#{options[:width]}x#{options[:height]}"
+          @resize_options = "-resize #{options[:width]}x#{options[:height]}"
+        end
+
+        def output_options
+          options[:path] = if options[:path]
+                             if File.directory?(options[:path])
+                               basename = File.basename(polei.path_with_md5)
+                               File.join(options[:path], basename)
+                             else
+                               options[:path]
+                             end
+                           else
+                             polei.path_with_md5(:png)
+                           end
         end
       end # class OptionsGenerator
     end # class GraphicsMagick
