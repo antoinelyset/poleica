@@ -1,5 +1,6 @@
 # -*- encoding: utf-8 -*-
 require 'digest/md5'
+require 'shellwords'
 
 module Poleica
   module Converters
@@ -29,6 +30,12 @@ module Poleica
         path         = bin_paths[host_os] || bin_paths[:linux]
         raise "#{self.class} not found @ #{path}" unless File.exists?(path)
         path
+      end
+
+      module_function
+
+      def escape(string)
+        Shellwords.shellescape(string)
       end
     end
   end

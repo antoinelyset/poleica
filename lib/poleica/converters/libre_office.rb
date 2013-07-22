@@ -89,8 +89,8 @@ module Poleica
         end
 
         def output_options
-          output_dir_path = File.dirname(temp_path)
-          "--outdir #{output_dir_path} #{temp_path}"
+          dir_path = File.dirname(temp_path)
+          "--outdir #{Utils.escape(dir_path)} #{Utils.escape(temp_path)}"
         end
 
         def pages_options

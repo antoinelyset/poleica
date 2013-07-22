@@ -1,4 +1,5 @@
 # -*- encoding: utf-8 -*-
+
 module Poleica
   module Converters
     # The GraphicsMagick converter, use the 'gm' command to convert images and
@@ -16,6 +17,8 @@ module Poleica
        Types::PDF
      ]
 
+     DEFAULT_MEASURE = 612
+
       attr_reader :polei
 
       def initialize(polei)
@@ -25,7 +28,7 @@ module Poleica
       def to_png(options = {})
         opts_gen = OptionsGenerator.new(polei, options)
         cmd = "#{bin_path} convert "
-        cmd << "#{polei.path}#{opts_gen.generate} "
+        cmd << "#{Utils.escape(polei.path)}#{opts_gen.generate} "
         `#{cmd}`
         expected_file_path = opts_gen[:path]
         File.exists?(expected_file_path) ? expected_file_path : nil
@@ -40,12 +43,11 @@ module Poleica
 
         def initialize(polei, options = {})
           @polei   = polei
-          defaults = { page: 0 }
-          @options = defaults.merge(options)
+          @options = default_options.merge(options)
         end
 
         def generate
-          "#{pages_options} #{resize_options} #{output_options}"
+          "#{page_options} #{resize_options} #{Utils.escape(output_options)}"
         end
 
         def [](key)
@@ -54,15 +56,22 @@ module Poleica
 
         private
 
-        def pages_options
-          @pages_options ||= Array(options[:page]).
-            flatten.compact.uniq.sort.to_s
+        def default_options
+          {
+            height: DEFAULT_MEASURE,
+            width: DEFAULT_MEASURE,
+            page: 0
+          }
+        end
+
+        def page_options
+          @page_options ||=
+            "#{Array(options[:page]).flatten.compact.uniq.sort.to_s}"
         end
 
         def resize_options
-          return nil unless @resize_options ||
-            options[:height] || options[:width]
-          @resize_options = "-resize #{options[:width]}x#{options[:height]}"
+          @resize_options ||=
+            "-resize #{options[:width]}x#{options[:height]}"
         end
 
         def output_options
