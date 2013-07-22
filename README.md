@@ -1,4 +1,3 @@
-
 # Poleica
 ## Poleica = Polaroid + Leica (Real Hipster)
 
@@ -20,9 +19,9 @@ Poleica.new(file_path).to_png(width: 400, weight: 400)
 
 ## Options
 
-weight: pixel
-width:  pixel
-path:   folder or file
+- weight: pixel
+- width:  pixel
+- path:   folder or file
 
 ## Requirements
 
