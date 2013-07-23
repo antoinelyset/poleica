@@ -19,10 +19,14 @@ module Poleica
         htm
         odt
         doc
+        docx
         xls
+        xlsx
         ppt
+        pptx
         pps
-        doc
+        key
+        pages
         txt
         rft
       }
