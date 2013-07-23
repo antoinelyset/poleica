@@ -30,6 +30,19 @@ class CoerciveTest < Minitest::Test
     clean_pdf_file
   end
 
+  def test_coercive_conversion
+    polei = Poleica.new(DOC_PATH)
+    returned_path = polei.to_png
+    assert(File.exists?(returned_path))
+    clean_png_file(find_png_path)
+  end
+
+  def test_coercive_null_return
+    polei = Poleica.new("#{Support.support_path}/files/example.mp3")
+    returned_path = polei.to_png
+    assert_equal(nil, returned_path)
+  end
+
   private
 
   def clean_pdf_file

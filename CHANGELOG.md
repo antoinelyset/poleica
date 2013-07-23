@@ -1,3 +1,5 @@
+# Poleica 0.9.2 (23 July 2013)
+* Fix the coercive converter
 # Poleica 0.9.1 (22 July 2013)
 * Escape path options
 # Poleica 0.9.0 (19 July 2013)

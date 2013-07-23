@@ -16,6 +16,16 @@ module Poleica
         @polei = polei
       end
 
+      private
+
+      def method_missing(method, *args, &block)
+        extension  = method.to_s.split(/^to_(.*)/)[1]
+        options    = args.last if args.last.is_a?(Hash)
+        options    ||= {}
+        return try_convert(method, options) if extension
+        super
+      end
+
       def try_convert(method, options = {})
         coerced_path = coerce(method, options)
         return nil unless coerced_path
@@ -24,14 +34,11 @@ module Poleica
         converted_path
       end
 
-      private
-
       def coerce(method, options)
-        default_conversion_hash = { method => Converters::Null }
-        conversion_hash   = find_next_converter_by_method(method)
-        conversion_hash ||= default_conversion_hash
-        next_method       = conversion_hash.keys.first
-        polei.send(next_method.to_sym)
+        conversion_hash = find_next_converter_by_method(method)
+        return nil unless conversion_hash
+        next_method     = conversion_hash.keys.first
+        polei.send(next_method.to_sym, options)
       end
 
       # Find the next method and converter needed to execute
