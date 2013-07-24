@@ -14,6 +14,7 @@ module Poleica
         'text/rtf'                                 # .rft
       ]
 
+      # Unsupported :( : key, pages
       COMPATIBLE_EXTENSIONS = %w{
         html
         htm
@@ -25,8 +26,6 @@ module Poleica
         ppt
         pptx
         pps
-        key
-        pages
         txt
         rft
       }
