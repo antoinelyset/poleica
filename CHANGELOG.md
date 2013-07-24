@@ -1,4 +1,6 @@
-# Poleica 0.9.3 (23 July 2013)
+# Poleica 0.9.4 (24 July 2013)
+* Add Open Office document handling
+# Poleica 0.9.3 (24 July 2013)
 * Fix Unsupported Pages and Keynote file type
 # Poleica 0.9.2 (23 July 2013)
 * Fix the coercive converter
