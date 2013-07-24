@@ -1,3 +1,5 @@
+# Poleica 0.9.3 (23 July 2013)
+* Fix Unsupported Pages and Keynote file type
 # Poleica 0.9.2 (23 July 2013)
 * Fix the coercive converter
 # Poleica 0.9.1 (22 July 2013)

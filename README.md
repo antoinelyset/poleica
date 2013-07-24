@@ -23,6 +23,12 @@ Poleica.new(file_path).to_png(width: 400, weight: 400)
 - width:  pixel
 - path:   folder or file
 
+## Dependencies
+
+- GraphicsMagick (gm)
+- Java (I know...)
+- LibreOffice 
+
 ## Requirements
 
 - It should be easy
@@ -35,16 +41,13 @@ Poleica.new(file_path).to_png(width: 400, weight: 400)
 - Documents: PDF, PPT, DOC, TXT..
 - Images: PNG, JPEG, GIF...
 
-
 ## Conventions
 
 - I wrote mimetype not mime_type
 
-## Dependencies
+## Warning
 
-- GraphicsMagick (gm)
-- Java (I know...)
-- LibreOffice 
+- Exit LibreOffice App before tests and launch
 
 ## Thanks
 
