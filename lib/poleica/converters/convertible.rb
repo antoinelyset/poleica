@@ -9,9 +9,8 @@ module Poleica
     ]
 
     def method_missing(method, *args, &block)
-      extension  = method.to_s.split(/^to_(.*)/)[1]
-      options    = args.last if args.last.is_a?(Hash)
-      options    ||= {}
+      extension, options = Converters::Utils
+        .extract_extension_and_options(method, args)
       return convert_to_extension(extension, options) if extension
       super
     end

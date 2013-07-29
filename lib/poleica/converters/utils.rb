@@ -34,6 +34,13 @@ module Poleica
 
       module_function
 
+      def extract_extension_and_options(method, args = [])
+        extension  = method.to_s.split(/^to_(.*)/)[1]
+        options    = args.last if args.last.is_a?(Hash)
+        options    ||= {}
+        [extension, options]
+      end
+
       def escape(string)
         Shellwords.shellescape(string)
       end

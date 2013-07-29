@@ -3,6 +3,7 @@ module Poleica
   module Converters
     # The Coercive converter, it tries to coerce the polei
     class Coercive
+      include Poleica::Converters::Utils
 
       # TODO Think about another way of declare return types
       TYPE_RETURNED_BY_METHOD = {
@@ -19,9 +20,7 @@ module Poleica
       private
 
       def method_missing(method, *args, &block)
-        extension  = method.to_s.split(/^to_(.*)/)[1]
-        options    = args.last if args.last.is_a?(Hash)
-        options    ||= {}
+        extension, options = Utils.extract_extension_and_options(method, args)
         return try_convert(method, options) if extension
         super
       end
