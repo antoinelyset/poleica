@@ -6,11 +6,28 @@
 [![Code Climate](https://codeclimate.com/github/antoinelyset/Poleica.png)](https://codeclimate.com/github/antoinelyset/Poleica)
 [![Dependency Status](https://gemnasium.com/antoinelyset/Poleica.png)](https://gemnasium.com/antoinelyset/Poleica)
 
+## Install
+
+__Ubuntu__ :
+
+```
+apt-get install graphicsmagick libreoffice
+```
+
+__MacOS__ :
+
+```
+brew install graphicsmagick
+```
+
+Then download [LibreOffice](http://www.libreoffice.org/download) and install it.
 ## Concept
 
 _ -> PDF -> Image
 
 Image    -> Image
+
+## Usage
 
 ```
 Poleica.new(file_path).to_png
@@ -22,6 +39,7 @@ Poleica.new(file_path).to_png(width: 400, weight: 400)
 - weight: pixel
 - width:  pixel
 - path:   folder or file
+- force_resize: boolean (it doesnt preserve the image ratio)
 
 ## Dependencies
 
