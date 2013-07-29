@@ -1,3 +1,5 @@
+# Poleica 0.9.5 (29 July 2013)
+* Implement force_resize option for GraphicsMagick
 # Poleica 0.9.4 (24 July 2013)
 * Add Open Office document handling
 # Poleica 0.9.3 (24 July 2013)

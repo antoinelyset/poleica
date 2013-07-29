@@ -53,6 +53,29 @@ class GraphicsMagickTest < Minitest::Test
     File.delete(expected_path) if File.exists?(expected_path)
   end
 
+  def test_force_resize_option
+    returned_path = pdf_polei.to_png(width: 100,
+                                     height: 100,
+                                     force_resize: true)
+    expected_path = Support.expected_converted_path(PDF_PATH, :png)
+    bin_path = Poleica::Converters::GraphicsMagick.new(pdf_polei).bin_path
+    assert_equal(expected_path, returned_path)
+    size = `#{bin_path} identify #{returned_path}`.split[2][/(\w)*/]
+    assert_equal('100x100', size)
+    clean_png_file
+  end
+
+  def test_resize_option
+    returned_path = pdf_polei.to_png(width: 100,
+                                     height: 100)
+    expected_path = Support.expected_converted_path(PDF_PATH, :png)
+    bin_path = Poleica::Converters::GraphicsMagick.new(pdf_polei).bin_path
+    assert_equal(expected_path, returned_path)
+    size = `#{bin_path} identify #{returned_path}`.split[2][/(\w)*/]
+    assert_equal('77x100', size)
+    clean_png_file
+  end
+
   private
 
   def clean_png_file

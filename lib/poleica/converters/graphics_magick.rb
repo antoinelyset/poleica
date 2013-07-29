@@ -1,5 +1,4 @@
 # -*- encoding: utf-8 -*-
-
 module Poleica
   module Converters
     # The GraphicsMagick converter, use the 'gm' command to convert images and
@@ -60,7 +59,8 @@ module Poleica
           {
             height: DEFAULT_MEASURE,
             width: DEFAULT_MEASURE,
-            page: 0
+            force_resize: false,
+            page: 0,
           }
         end
 
@@ -71,7 +71,9 @@ module Poleica
 
         def resize_options
           @resize_options ||=
-            "-resize #{options[:width]}x#{options[:height]}"
+            "-resize #{options[:width]}x" +
+                    "#{options[:height]}" +
+                    "#{'!' if options[:force_resize]}"
         end
 
         def output_options
