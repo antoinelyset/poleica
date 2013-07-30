@@ -40,11 +40,12 @@ Poleica.new(file_path).to_png(width: 400, weight: 400)
 - width:  pixel
 - path:   folder or file
 - force_resize: boolean (it doesnt preserve the image ratio)
+- thumbnail : boolean (it crops the image the given weight and width,
+  preserving the image ratio)
 
 ## Dependencies
 
 - GraphicsMagick (gm)
-- Java (I know...)
 - LibreOffice 
 
 ## Requirements
