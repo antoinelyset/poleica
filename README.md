@@ -20,6 +20,18 @@ __MacOS__ :
 brew install graphicsmagick
 ```
 
+__Then__ :
+
+```
+gem install poleica
+```
+
+or in __Gemfile__ :
+
+```
+gem 'poleica'
+```
+
 Then download [LibreOffice](http://www.libreoffice.org/download) and install it.
 ## Concept
 
