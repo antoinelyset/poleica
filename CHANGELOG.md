@@ -1,3 +1,5 @@
+# Poleica 0.9.6 (30 July 2013)
+* Add thumbnail option in GraphicsMagick <3
 # Poleica 0.9.5 (29 July 2013)
 * Implement force_resize option for GraphicsMagick
 # Poleica 0.9.4 (24 July 2013)
