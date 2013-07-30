@@ -46,7 +46,8 @@ module Poleica
         end
 
         def generate
-          "#{page_options} #{resize_options} #{Utils.escape(output_options)}"
+          "#{page_options} #{thumbnail_or_resize_options}" +
+            " #{Utils.escape(output_options)}"
         end
 
         def [](key)
@@ -60,6 +61,7 @@ module Poleica
             height: DEFAULT_MEASURE,
             width: DEFAULT_MEASURE,
             force_resize: false,
+            thumbnail: false,
             page: 0,
           }
         end
@@ -67,6 +69,20 @@ module Poleica
         def page_options
           @page_options ||=
             "#{Array(options[:page]).flatten.compact.uniq.sort.to_s}"
+        end
+
+        def thumbnail_or_resize_options
+          @thumbnail_or_resize_options ||=
+            options[:thumbnail] ? thumbnail_options : resize_options
+        end
+
+        def thumbnail_options
+          @thumbnail_options ||=
+            "-thumbnail #{options[:width]}x"  +
+                       "#{options[:height]}^" +
+                       ' -gravity center'     +
+              " -extent #{options[:width]}x"  +
+                       "#{options[:height]}"
         end
 
         def resize_options

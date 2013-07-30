@@ -76,6 +76,18 @@ class GraphicsMagickTest < Minitest::Test
     clean_png_file
   end
 
+  def test_thumbnail_option
+    returned_path = pdf_polei.to_png(width: 100,
+                                     height: 100,
+                                     thumbnail: true)
+    expected_path = Support.expected_converted_path(PDF_PATH, :png)
+    bin_path = Poleica::Converters::GraphicsMagick.new(pdf_polei).bin_path
+    assert_equal(expected_path, returned_path)
+    size = `#{bin_path} identify #{returned_path}`.split[2][/(\w)*/]
+    assert_equal('100x100', size)
+    clean_png_file
+  end
+
   private
 
   def clean_png_file
