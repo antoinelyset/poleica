@@ -17,7 +17,7 @@ apt-get install graphicsmagick libreoffice
 __MacOS__ :
 
 ```
-brew install graphicsmagick
+brew install ghostscript graphicsmagick
 ```
 
 __Then__ :
