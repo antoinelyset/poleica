@@ -9,7 +9,6 @@ before_script:
   - sudo apt-get update -qq
   - sudo apt-get install -qq graphicsmagick libreoffice
 script:
-  - rake test
-  - rubocop
+  - rake
 notifications:
   email: false
