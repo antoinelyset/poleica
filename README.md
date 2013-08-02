@@ -57,7 +57,7 @@ Poleica.new(file_path).to_png(width: 400, weight: 400)
 
 ## Dependencies
 
-- GraphicsMagick (gm)
+- GraphicsMagick (gm) >= 1.3.11
 - LibreOffice 
 
 ## Requirements
