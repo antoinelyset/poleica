@@ -53,7 +53,7 @@ class LibreOfficeTest < Minitest::Test
 
   private
 
-  def multithreaded_conversion(threads_number = 10)
+  def multithreaded_conversion(threads_number = 5)
     (0..threads_number - 1).map do |n|
       Thread.new do
         path_option = "#{Support.support_path}/files/path_test#{n}.pdf"
