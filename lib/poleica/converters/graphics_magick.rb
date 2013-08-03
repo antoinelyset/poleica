@@ -27,7 +27,7 @@ module Poleica
       def to_png(options = {})
         opts_gen = OptionsGenerator.new(polei, options)
         cmd = "#{bin_path} convert "
-        cmd << "#{Utils.escape(polei.path)}#{opts_gen.generate} "
+        cmd << "#{Utils.escape(polei.path)}#{opts_gen.generate}"
         `#{cmd}`
         expected_file_path = opts_gen[:path]
         File.exists?(expected_file_path) ? expected_file_path : nil
@@ -46,7 +46,8 @@ module Poleica
         end
 
         def generate
-          "#{page_options} #{thumbnail_or_resize_options}" +
+          "#{page_options} #{orient_options}"   +
+            " #{thumbnail_or_resize_options}"   +
             " #{Utils.escape(output_options)}"
         end
 
@@ -61,6 +62,7 @@ module Poleica
             height: DEFAULT_MEASURE,
             width: DEFAULT_MEASURE,
             force_resize: false,
+            auto_orient: true,
             thumbnail: false,
             page: 0,
           }
@@ -69,6 +71,10 @@ module Poleica
         def page_options
           @page_options ||=
             "#{Array(options[:page]).flatten.compact.uniq.sort.to_s}"
+        end
+
+        def orient_options
+          @orient_options ||= options[:auto_orient] ? '-auto-orient' : ''
         end
 
         def thumbnail_or_resize_options
