@@ -4,6 +4,7 @@
 [![Build Status](https://travis-ci.org/antoinelyset/poleica.png?branch=master)](https://travis-ci.org/antoinelyset/poleica)
 [![Coverage Status](https://coveralls.io/repos/antoinelyset/Poleica/badge.png)](https://coveralls.io/r/antoinelyset/Poleica)
 [![Code Climate](https://codeclimate.com/github/antoinelyset/Poleica.png)](https://codeclimate.com/github/antoinelyset/Poleica)
+[![Gem Version](https://badge.fury.io/rb/poleica.png)](http://badge.fury.io/rb/poleica)
 [![Dependency Status](https://gemnasium.com/antoinelyset/Poleica.png)](https://gemnasium.com/antoinelyset/Poleica)
 
 ## Install
