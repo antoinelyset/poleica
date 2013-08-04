@@ -1,3 +1,5 @@
+# Poleica 0.9.7 (4 August 2013)
+* Add an auto-orient (true by default) to GraphicsMagick
 # Poleica 0.9.6 (30 July 2013)
 * Add thumbnail option in GraphicsMagick <3
 # Poleica 0.9.5 (29 July 2013)
