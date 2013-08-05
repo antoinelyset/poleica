@@ -57,7 +57,7 @@ Poleica.new(file_path).to_png(width: 400, weight: 400)
 
 ## Dependencies
 
-- GraphicsMagick (gm) >= 1.3.11
+- GraphicsMagick (gm) >= 1.3.18 (for auto-rotate)
 - LibreOffice 
 
 ## Requirements
