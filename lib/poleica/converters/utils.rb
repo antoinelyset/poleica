@@ -1,12 +1,15 @@
 # -*- encoding: utf-8 -*-
 require 'digest/md5'
 require 'shellwords'
+require 'timeout'
 
 module Poleica
   module Converters
     # An Utility module for the converters needs to be include
     module Utils
       HOST_OS ||= (defined?('RbConfig') ? RbConfig : Config)::CONFIG['host_os']
+
+      DEFAULT_TIMEOUT = 120
 
       def windows?
         !!HOST_OS.match(/mswin|windows|cygwin/i)
@@ -44,6 +47,14 @@ module Poleica
       def escape(string)
         Shellwords.shellescape(string)
       end
-    end
-  end
-end
+
+      def exec_with_timeout(cmd, timeout = DEFAULT_TIMEOUT, no_stdout = true)
+        cmd << ' >/dev/null' if no_stdout
+        pid = Process.spawn(cmd)
+        Timeout.timeout(timeout) { Process.wait(pid) }
+      rescue Timeout::Error
+        Process.kill('TERM', pid)
+      end
+    end # module Utils
+  end # module Converters
+end # module Poleica

@@ -25,7 +25,7 @@ module Poleica
       def to_pdf(options = {})
         opts_gen = OptionsGenerator.new(polei, options, :pdf)
         cmd      = "#{bin_path} #{opts_gen.generate}"
-        `#{cmd}`
+        exec_with_timeout(cmd)
         expected_file_path = opts_gen[:path] || polei.path_with_md5(:pdf)
         File.exists?(expected_file_path) ? expected_file_path : nil
       ensure
