@@ -17,5 +17,9 @@ before_script:
   - sudo ln -s /usr/local/bin/gm /usr/bin/gm
 script:
   - rake
+matrix:
+  allow_failures:
+    - rvm: jruby-19mode
+    - rvm: rbx-19mode
 notifications:
   email: false

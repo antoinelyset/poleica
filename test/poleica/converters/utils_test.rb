@@ -2,7 +2,7 @@
 require 'test_helper'
 # Test the Utils Converter Module
 class UtilsTest < Minitest::Test
-  def test_exect_with_timeout
+  def test_exec_with_timeout
     start_time = Time.now
     Poleica::Converters::Utils.exec_with_timeout('sleep 2', 1)
     duration = Time.now - start_time
