@@ -28,7 +28,7 @@ module Poleica
         opts_gen = OptionsGenerator.new(polei, options)
         cmd = "#{bin_path} convert "
         cmd << "#{Utils.escape(polei.path)}#{opts_gen.generate}"
-        `#{cmd}`
+        exec_with_timeout(cmd)
         expected_file_path = opts_gen[:path]
         File.exists?(expected_file_path) ? expected_file_path : nil
       end
