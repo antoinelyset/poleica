@@ -11,15 +11,15 @@
 
 __Ubuntu__ :
 
-```
-apt-get install graphicsmagick libreoffice
-```
+Look at .travis.yml file
 
 __MacOS__ :
 
 ```
 brew install ghostscript graphicsmagick
 ```
+Download [LibreOffice](http://www.libreoffice.org/download) and install it.
+
 
 __Then__ :
 
@@ -33,7 +33,6 @@ or in __Gemfile__ :
 gem 'poleica'
 ```
 
-Then download [LibreOffice](http://www.libreoffice.org/download) and install it.
 ## Concept
 
 _ -> PDF -> Image
