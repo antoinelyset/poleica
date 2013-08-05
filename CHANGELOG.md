@@ -1,3 +1,5 @@
+# Poleica 0.9.8 (5 August 2013)
+* Add timeout (2 mins) on LibreOffice and GraphicsMagick execution 
 # Poleica 0.9.7 (4 August 2013)
 * Add an auto-orient (true by default) to GraphicsMagick
 # Poleica 0.9.6 (30 July 2013)
