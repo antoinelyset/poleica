@@ -5,6 +5,10 @@ module Poleica
     class Coercive
       include Poleica::Converters::Utils
 
+      COMPATIBLE_TYPES = [
+        Types::All
+      ]
+
       # TODO Think about another way of declare return types
       TYPE_RETURNED_BY_METHOD = {
         to_pdf: Types::PDF,
@@ -58,8 +62,7 @@ module Poleica
         polei.compatible_convert_methods.map do |m|
           ret_type = TYPE_RETURNED_BY_METHOD[m.to_sym]
           next unless ret_type
-          convs = Poleica::Convertible.
-            compatible_converters_by_type(ret_type)
+          convs = Poleica::Convertible.compatible_converters_by_type(ret_type)
           convs.map { |conv| { m.to_sym => conv } }
         end.compact.flatten(1)
       end

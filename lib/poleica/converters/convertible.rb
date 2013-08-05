@@ -3,14 +3,13 @@ module Poleica
   # Conversion Logic, given a type it can search for compatible converters
   module Convertible
 
-    CONVERTERS = [
-      Converters::GraphicsMagick,
-      Converters::LibreOffice
-    ]
+    CONVERTERS = Poleica::Converters
+      .constants.map { |c| Poleica::Converters.const_get(c) } -
+        [Poleica::Converters::Utils]
 
     def method_missing(method, *args, &block)
-      extension, options = Converters::Utils
-        .extract_extension_and_options(method, args)
+      extension, options =
+        Converters::Utils.extract_extension_and_options(method, args)
       return convert_to_extension(extension, options) if extension
       super
     end
@@ -20,7 +19,7 @@ module Poleica
       converter.send("to_#{extension}".to_sym, options)
     end
 
-    def converter_to_extension(extension, filter = :mimetype)
+    def converter_to_extension(extension)
       compatible_converter = compatible_converters.find do |converter|
         converter.method_defined?(:"to_#{extension}")
       end
@@ -55,6 +54,5 @@ module Poleica
     def methods_for_converter(converter)
       converter.instance_methods(false).map(&:to_s)
     end
-
   end # module Convertible
 end # module Poleica

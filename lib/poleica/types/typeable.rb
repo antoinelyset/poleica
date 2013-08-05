@@ -14,18 +14,12 @@ module Poleica
     def file_type
       @file_type ||= (detect_type_with_extension ||
                       detect_type_with_mimetype  ||
-                      Types::Null).new(path)
+                      Types::General).new(path)
     end
 
     private
 
     MIMETYPE_EXTRACT_REGEX = /([^;:]+)/
-
-    TYPES = [
-      Types::Image,
-      Types::Document,
-      Types::PDF
-    ]
 
     def extract_mimetype
       `file -b --mime '#{path}'`.strip[MIMETYPE_EXTRACT_REGEX] || ''
@@ -36,13 +30,13 @@ module Poleica
     end
 
     def detect_type_with_extension
-      TYPES.find do |type|
+      Types::All.find do |type|
         type::COMPATIBLE_EXTENSIONS.include?(file_extension)
       end
     end
 
     def detect_type_with_mimetype
-      TYPES.find do |type|
+      Types::All.find do |type|
         type::COMPATIBLE_MIMETYPES.include?(file_mimetype)
       end
     end
