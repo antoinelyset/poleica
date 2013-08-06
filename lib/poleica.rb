@@ -9,14 +9,14 @@ end # module Poleica
 require 'poleica/version'
 
 require 'poleica/types/pdf'
-require 'poleica/types/null'
 require 'poleica/types/image'
 require 'poleica/types/document'
 require 'poleica/types/typeable'
+require 'poleica/types/general'
+require 'poleica/types/all'
 
 require 'poleica/converters/utils'
 require 'poleica/converters/general'
-require 'poleica/converters/null'
 require 'poleica/converters/coercive'
 require 'poleica/converters/graphics_magick'
 require 'poleica/converters/libre_office'
