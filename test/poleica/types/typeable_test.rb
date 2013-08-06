@@ -26,7 +26,7 @@ class TypeableTest < Minitest::Test
   def test_that_it_extracts_a_type_object
     expected_classes = [
                          Poleica::Types::Document,
-                         Poleica::Types::Null,
+                         Poleica::Types::General,
                          Poleica::Types::Document,
                          Poleica::Types::Image
                        ]
@@ -39,7 +39,7 @@ class TypeableTest < Minitest::Test
   def test_that_it_returns_null_type_by_default
     mp3_path = "#{Support.support_path}/files/example.mp3"
     type_class = Poleica::Polei.new(mp3_path).file_type.class
-    assert_equal(type_class, Poleica::Types::Null)
+    assert_equal(type_class, Poleica::Types::General)
   end
 
   ## Helpers
