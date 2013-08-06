@@ -8,7 +8,7 @@ module Poleica
       include Poleica::Converters::Utils
 
       BIN_PATHS = {
-        linux:  '/usr/bin/soffice.bin',
+        linux:  '/usr/lib/libreoffice/program/soffice.bin',
         osx: '/Applications/LibreOffice.app/Contents/MacOS/soffice.bin'
       }
 

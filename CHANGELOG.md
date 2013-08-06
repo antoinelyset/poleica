@@ -1,3 +1,5 @@
+# Poleica 0.9.10 (6 August 2013)
+* Update Libreoffice path and nolog option
 # Poleica 0.9.9 (6 August 2013)
 * Add configure method to Poleica, with timeout option
 # Poleica 0.9.8 (5 August 2013)
