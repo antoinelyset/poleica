@@ -9,7 +9,7 @@ module Poleica
 
       BIN_PATHS = {
         linux:  '/usr/bin/soffice.bin',
-        osx: '/Applications/LibreOffice.app/Contents/MacOS/soffice'
+        osx: '/Applications/LibreOffice.app/Contents/MacOS/soffice.bin'
       }
 
       COMPATIBLE_TYPES = [
