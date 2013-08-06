@@ -52,8 +52,9 @@ module Poleica
         cmd << ' >/dev/null' if no_stdout
         pid = Process.spawn(cmd)
         Timeout.timeout(timeout) { Process.wait(pid) }
-      rescue Timeout::Error
-        Process.kill('TERM', pid)
+      rescue Timeout::Error => e
+        Process.kill('KILL', pid)
+        raise e
       end
     end # module Utils
   end # module Converters

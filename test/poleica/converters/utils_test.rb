@@ -4,7 +4,7 @@ require 'test_helper'
 class UtilsTest < Minitest::Test
   def test_exec_with_timeout
     start_time = Time.now
-    Poleica::Converters::Utils.exec_with_timeout('sleep 2', 1)
+    Poleica::Converters::Utils.exec_with_timeout('sleep 2', 1) rescue nil
     duration = Time.now - start_time
     assert(duration < 2)
   end
