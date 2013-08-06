@@ -85,7 +85,8 @@ module Poleica
         end
 
         def default_options
-          '--headless --invisible --norestore --nolockcheck --convert-to'
+          '--nologo --headless --invisible' +
+            ' --norestore --nolockcheck --convert-to'
         end
 
         def output_options
