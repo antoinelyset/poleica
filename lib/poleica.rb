@@ -7,6 +7,7 @@ module Poleica
 end # module Poleica
 
 require 'poleica/version'
+require 'poleica/configuration'
 
 require 'poleica/types/pdf'
 require 'poleica/types/image'

@@ -1,3 +1,5 @@
+# Poleica 0.9.9 (6 August 2013)
+* Add configure method to Poleica, with timeout option
 # Poleica 0.9.8 (5 August 2013)
 * Add timeout (2 mins) on LibreOffice and GraphicsMagick execution 
 # Poleica 0.9.7 (4 August 2013)
