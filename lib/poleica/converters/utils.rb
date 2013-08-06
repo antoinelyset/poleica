@@ -9,8 +9,6 @@ module Poleica
     module Utils
       HOST_OS ||= (defined?('RbConfig') ? RbConfig : Config)::CONFIG['host_os']
 
-      DEFAULT_TIMEOUT = 120
-
       def windows?
         !!HOST_OS.match(/mswin|windows|cygwin/i)
       end
@@ -48,12 +46,15 @@ module Poleica
         Shellwords.shellescape(string)
       end
 
-      def exec_with_timeout(cmd, timeout = DEFAULT_TIMEOUT, no_stdout = true)
+      def exec_with_timeout(cmd,
+                            timeout   = Poleica.configuration.timeout,
+                            no_stdout = true)
         cmd << ' >/dev/null' if no_stdout
         pid = Process.spawn(cmd)
         Timeout.timeout(timeout) { Process.wait(pid) }
-      rescue Timeout::Error
-        Process.kill('TERM', pid)
+      rescue Timeout::Error => e
+        Process.kill('KILL', pid)
+        raise e
       end
     end # module Utils
   end # module Converters
