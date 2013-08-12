@@ -26,9 +26,7 @@ module Poleica
 
       def to_png(options = {})
         opts_gen = OptionsGenerator.new(polei, options)
-        cmd = "#{bin_path} convert "
-        cmd << "#{Utils.escape(polei.path)}#{opts_gen.generate}"
-        exec_with_timeout(cmd)
+        exec_with_timeout(bin_path, opts_gen.generate)
         expected_file_path = opts_gen[:path]
         File.exists?(expected_file_path) ? expected_file_path : nil
       end
@@ -46,9 +44,13 @@ module Poleica
         end
 
         def generate
-          "#{page_options} #{orient_options}"   +
-            " #{thumbnail_or_resize_options}"   +
-            " #{Utils.escape(output_options)}"
+          [
+            'convert',
+            "#{polei.path}#{page_options}",
+            orient_options,
+            thumbnail_or_resize_options,
+            output_options
+          ].flatten
         end
 
         def [](key)
@@ -84,18 +86,23 @@ module Poleica
 
         def thumbnail_options
           @thumbnail_options ||=
-            "-thumbnail #{options[:width]}x"  +
-                       "#{options[:height]}^" +
-                       ' -gravity center'     +
-              " -extent #{options[:width]}x"  +
-                       "#{options[:height]}"
+            [
+              '-thumbnail',
+              "#{options[:width]}x#{options[:height]}^",
+              '-gravity',
+              'center',
+              '-extent',
+              "#{options[:width]}x#{options[:height]}"
+            ]
         end
 
         def resize_options
           @resize_options ||=
-            "-resize #{options[:width]}x" +
-                    "#{options[:height]}" +
-                    "#{'!' if options[:force_resize]}"
+            [
+              '-resize',
+              "#{options[:width]}x#{options[:height]}" +
+                "#{'!' if options[:force_resize]}"
+            ]
         end
 
         def output_options

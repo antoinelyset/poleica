@@ -41,28 +41,7 @@ class LibreOfficeTest < Minitest::Test
     assert_equal(returned_path, path_option)
   end
 
-#  FIXME fail on Ubuntu
-#  def test_multithreading
-#    threads = multithreaded_conversion
-#    threads.each_with_index do |t, n|
-#      t.join
-#      assert_equal(t[:expected_path], t[:returned_path])
-#      assert(File.exists?(t[:expected_path]))
-#      File.delete(t[:expected_path]) if File.exists?(t[:expected_path])
-#    end
-#  end
-
   private
-
-  def multithreaded_conversion(threads_number = 5)
-    (0..threads_number - 1).map do |n|
-      Thread.new do
-        path_option = "#{Support.support_path}/files/path_test#{n}.pdf"
-        Thread.current[:expected_path] = path_option
-        Thread.current[:returned_path] = doc_polei.to_pdf(path: path_option)
-      end
-    end
-  end
 
   def clean_pdf_file
     if File.exists?(Support.expected_converted_path(DOC_PATH, :pdf))

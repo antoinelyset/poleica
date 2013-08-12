@@ -24,8 +24,7 @@ module Poleica
 
       def to_pdf(options = {})
         opts_gen = OptionsGenerator.new(polei, options, :pdf)
-        cmd      = "#{bin_path} #{opts_gen.generate}"
-        exec_with_timeout(cmd)
+        exec_with_timeout(bin_path, opts_gen.generate)
         expected_file_path = opts_gen[:path] || polei.path_with_md5(:pdf)
         File.exists?(expected_file_path) ? expected_file_path : nil
       ensure
@@ -47,7 +46,11 @@ module Poleica
         end
 
         def generate
-          "#{default_options} #{format} #{output_options}"
+          [
+            default_options,
+            format,
+            output_options
+          ].flatten
         end
 
         def [](key)
@@ -85,18 +88,19 @@ module Poleica
         end
 
         def default_options
-          '--nologo --headless --invisible' +
-            ' --norestore --nolockcheck --convert-to'
+          %w{
+             --nologo
+             --headless
+             --invisible
+             --norestore
+             --nolockcheck
+             --convert-to
+          }
         end
 
         def output_options
           dir_path = File.dirname(temp_path)
-          "--outdir #{Utils.escape(dir_path)} #{Utils.escape(temp_path)}"
-        end
-
-        def pages_options
-          @pages_options ||= Array(options[:page]).
-            flatten.compact.uniq.sort.to_s
+          ['--outdir', dir_path, temp_path]
         end
       end # class OptionsGenerator
     end # class LibreOffice

@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 require 'digest/md5'
-require 'shellwords'
 require 'timeout'
+require 'spoon'
 
 module Poleica
   module Converters
@@ -42,19 +42,26 @@ module Poleica
         [extension, options]
       end
 
-      def escape(string)
-        Shellwords.shellescape(string)
+      def exec_with_timeout(bin, args = [], timeout = nil, is_stdout = true)
+        args = Array(args).map(&:to_s)
+        timeout ||= Poleica.configuration.timeout
+        pid = stdout_redirect(is_stdout) { Spoon.spawnp(bin, *args) }
+        Timeout.timeout(timeout)   { Process.wait(pid) }
+      rescue Timeout::Error => e
+        Process.kill(:TERM, pid)
+        raise e
       end
 
-      def exec_with_timeout(cmd,
-                            timeout   = Poleica.configuration.timeout,
-                            no_stdout = true)
-        cmd << ' >/dev/null' if no_stdout
-        pid = Process.spawn(cmd)
-        Timeout.timeout(timeout) { Process.wait(pid) }
-      rescue Timeout::Error => e
-        Process.kill('KILL', pid)
-        raise e
+      def stdout_redirect(no_stdout = true)
+        if no_stdout
+          orig_stdout = $stdout.clone
+          $stdout.reopen File.new('/dev/null', 'w')
+          yield
+        else
+          yield
+        end
+      ensure
+        $stdout.reopen orig_stdout if no_stdout
       end
     end # module Utils
   end # module Converters

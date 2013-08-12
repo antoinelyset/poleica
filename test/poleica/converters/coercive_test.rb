@@ -19,7 +19,6 @@ class CoerciveTest < Minitest::Test
   def test_try_convert_intermediary_file_creation
     coercive_conv.send(:coerce, :to_png, {})
     assert(File.exists?(expected_pdf_path))
-    clean_png_file
     clean_pdf_file
   end
 
