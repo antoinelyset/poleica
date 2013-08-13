@@ -43,9 +43,9 @@ module Poleica
       end
 
       def exec_with_timeout(bin, args = [], timeout = nil, is_stdout = true)
-        args = Array(args).map(&:to_s)
+        args    = Array(args).map(&:to_s)
         timeout ||= Poleica.configuration.timeout
-        pid = stdout_redirect(is_stdout) { Spoon.spawnp(bin, *args) }
+        pid     = stdout_redirect(is_stdout) { Spoon.spawnp(bin, *args) }
         Timeout.timeout(timeout)   { Process.wait(pid) }
       rescue Timeout::Error => e
         Process.kill(:TERM, pid)
