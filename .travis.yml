@@ -16,7 +16,7 @@ before_script:
   - sudo make install
   - sudo ln -s /usr/local/bin/gm /usr/bin/gm
   # Try with a ping
-  - /usr/lib/libreoffice/program/soffice.bin
+  - /usr/lib/libreoffice/program/soffice.bin --version
 script:
   - rake
 matrix:
