@@ -44,7 +44,7 @@ module Poleica
       def exec_with_timeout(bin, args = [], timeout = nil, is_stdout = true)
         args      = Array(args).map(&:to_s)
         timeout ||= Poleica.configuration.timeout
-        null      = IO.new(IO.sysopen('/dev/null','w'), 'w')
+        null      = IO.new(IO.sysopen('/dev/null', 'w'), 'w')
         process   = ChildProcess.build(bin, *args).start
         process.io.stdout = process.io.stderr = null
         process.poll_for_exit(timeout)
