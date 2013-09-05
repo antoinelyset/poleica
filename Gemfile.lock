@@ -18,7 +18,7 @@ PATH
   remote: .
   specs:
     poleica (0.9.10)
-      spoon
+      childprocess
 
 GEM
   remote: https://rubygems.org/
@@ -166,8 +166,6 @@ GEM
       simplecov-html (~> 0.7.1)
     simplecov-html (0.7.1)
     slop (3.4.5)
-    spoon (0.0.4)
-      ffi
     sprockets (2.2.2)
       hike (~> 1.2)
       multi_json (~> 1.0)

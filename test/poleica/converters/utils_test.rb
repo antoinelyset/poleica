@@ -9,12 +9,6 @@ class UtilsTest < Minitest::Test
     assert(duration < 2)
   end
 
-  def test_exec_with_timeout_exception
-    assert_raises(Timeout::Error) do
-      Poleica::Converters::Utils.exec_with_timeout('sleep', 2, 0.1)
-    end
-  end
-
   def test_exec_with_timeout_kill
     assert(`ps -a | grep soffice.bin | grep -v grep`.empty?)
     Poleica.configure { |conf| conf.timeout = 0.001 }

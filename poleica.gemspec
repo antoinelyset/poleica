@@ -14,7 +14,8 @@ Gem::Specification.new do |s|
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
 
-  s.add_runtime_dependency     'spoon'
+  s.add_runtime_dependency     'childprocess'
+# s.add_runtime_dependency     'posix-spawn' ONLY MRI
 
   s.add_development_dependency 'bundler', '~> 1.3'
   s.add_development_dependency 'rake'

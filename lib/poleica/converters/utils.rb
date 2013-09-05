@@ -1,7 +1,6 @@
 # -*- encoding: utf-8 -*-
 require 'digest/md5'
-require 'timeout'
-require 'spoon'
+require 'childprocess'
 
 module Poleica
   module Converters
@@ -43,25 +42,16 @@ module Poleica
       end
 
       def exec_with_timeout(bin, args = [], timeout = nil, is_stdout = true)
-        args    = Array(args).map(&:to_s)
+        args      = Array(args).map(&:to_s)
         timeout ||= Poleica.configuration.timeout
-        pid     = stdout_redirect(is_stdout) { Spoon.spawnp(bin, *args) }
-        Timeout.timeout(timeout)   { Process.wait(pid) }
-      rescue Timeout::Error => e
-        Process.kill(:TERM, pid)
-        raise e
-      end
-
-      def stdout_redirect(no_stdout = true)
-        if no_stdout
-          orig_stdout = $stdout.clone
-          $stdout.reopen File.new('/dev/null', 'w')
-          yield
-        else
-          yield
-        end
+        null      = IO.new(IO.sysopen('/dev/null','w'), 'w')
+        process   = ChildProcess.build(bin, *args).start
+        process.io.stdout = process.io.stderr = null
+        process.poll_for_exit(timeout)
+      rescue ChildProcess::TimeoutError => e
+        process.stop && raise(e)
       ensure
-        $stdout.reopen orig_stdout if no_stdout
+        null && null.close
       end
     end # module Utils
   end # module Converters
