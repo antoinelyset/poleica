@@ -5,7 +5,7 @@ rvm:
   - 2.0.0
   - rbx-19mode
   - jruby-19mode
-before_script:
+before_install:
   - sudo apt-get update -qq
   - sudo apt-get install -qq libreoffice
   - wget http://78.108.103.11/MIRROR/ftp/GraphicsMagick/1.3/GraphicsMagick-1.3.18.tar.gz
@@ -14,6 +14,7 @@ before_script:
   - ./configure
   - make
   - sudo make install
+before_script:
   # Launch Poleica for the first time
   - bundle exec ruby -Ilib -rpoleica -e "Poleica.new('test/support/files/example.doc').to_pdf"
   - rm test/support/files/example-1eb0afc1a8a2179e723c58a49d5a84c6.pdf
