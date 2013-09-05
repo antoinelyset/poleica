@@ -7,7 +7,7 @@ module Poleica
       include Poleica::Converters::Utils
 
       BIN_PATHS = {
-        linux:  '/usr/bin/gm',
+        linux:  '/usr/local/bin/gm',
         osx:    '/usr/local/bin/gm'
       }
 
