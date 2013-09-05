@@ -14,9 +14,9 @@ before_script:
   - ./configure
   - make
   - sudo make install
-  - sudo ln -s /usr/local/bin/gm /usr/bin/gm
-  # Try with a ping
-  - /usr/lib/libreoffice/program/soffice.bin --version
+  # Launch Poleica for the first time
+  - ruby -Ilib -rpoleica -e "Poleica.new('test/support/files/example.doc').to_pdf"
+  - rm test/support/files/example-1eb0afc1a8a2179e723c58a49d5a84c6.pdf
 script:
   - rake
 matrix:
