@@ -6,7 +6,7 @@ gemspec
 
 group :test do
   gem 'minitest'
-  gem 'rubocop', :github => 'bbatsov/rubocop'
+  gem 'rubocop',   github:  'bbatsov/rubocop'
   gem 'coveralls', require: false
 end
 
@@ -15,5 +15,5 @@ group :development do
 
   # Guards
   gem 'guard-rubocop'
-  gem 'guard-minitest', :github => 'guard/guard-minitest'
+  gem 'guard-minitest', github: 'guard/guard-minitest'
 end
