@@ -15,7 +15,7 @@ before_install:
   - make
   - sudo make install
 script:
-  - rake init_libreoffice test rubocop
+  - bundle exec rake init_libreoffice test rubocop
 matrix:
   allow_failures:
     - rvm: jruby-19mode
