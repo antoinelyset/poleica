@@ -15,7 +15,7 @@ before_install:
   - make
   - sudo make install
 before_script:
-  - sh .travis/init_libreoffice.sh
+  - /usr/lib/libreoffice/program/soffice.bin --nologo --headless --invisible --norestore --nolockcheck --convert-to pdf test/support/files/example.doc && true
 script:
   - rake
 matrix:
