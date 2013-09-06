@@ -14,12 +14,8 @@ before_install:
   - ./configure
   - make
   - sudo make install
-before_script:
-  # Launch Poleica for the first time
-  - bundle exec ruby -Ilib -rpoleica -e "Poleica.new('test/support/files/example.doc').to_pdf"
-  - rm test/support/files/example-1eb0afc1a8a2179e723c58a49d5a84c6.pdf
 script:
-  - rake
+  - rake init_libreoffice test rubocop
 matrix:
   allow_failures:
     - rvm: jruby-19mode
