@@ -7,7 +7,7 @@ Rake::TestTask.new do |t|
 end
 
 task :init_libreoffice do |t|
-  require 'poleica'
+  require './lib/poleica'
   Poleica.new('test/support/files/example.doc').to_pdf
   expected_path = 'test/support/files/example-1eb0afc1a8a2179e723c58a49d5a84c6.pdf'
   File.delete(expected_path) if File.exists?(expected_path)
