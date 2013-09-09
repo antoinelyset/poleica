@@ -41,17 +41,25 @@ module Poleica
         [extension, options]
       end
 
-      def exec_with_timeout(bin, args = [], timeout = nil, is_stdout = true)
-        args      = Array(args).map(&:to_s)
-        timeout ||= Poleica.configuration.timeout
-        null      = IO.new(IO.sysopen('/dev/null', 'w'), 'w')
-        process   = ChildProcess.build(bin, *args).start
-        process.io.stdout = process.io.stderr = null
-        process.poll_for_exit(timeout)
+      def exec_with_timeout(bin, args = [], timeout = nil, no_stdout = true)
+        args              = Array(args).map(&:to_s)
+        timeout         ||= Poleica.configuration.timeout
+        process           = ChildProcess.build(bin, *args)
+        set_process_stdout(process, no_stdout)
+        process.start
+        timeout ? process.poll_for_exit(timeout) : process.wait
       rescue ChildProcess::TimeoutError => e
-        process.stop && raise(e)
-      ensure
-        null && null.close
+        process.stop
+        raise(Poleica::TimeoutError.new(e.message))
+      end
+
+      def set_process_stdout(process, no_stdout)
+        if no_stdout
+          null              = IO.new(IO.sysopen('/dev/null', 'w'), 'w')
+          process.io.stdout = process.io.stderr = null
+        else
+          process.io.inherit!
+        end
       end
     end # module Utils
   end # module Converters
