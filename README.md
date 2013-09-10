@@ -89,6 +89,8 @@ Poleica.configure do |config|
 
 ## Warning
 
+- If you want to disable .~lock.#{file_name}# creation in /tmp just :
+    ```export SAL_ENABLE_FILE_LOCKING=0```
 - Exit LibreOffice App before tests and launch
 
 ## Thanks
