@@ -7,11 +7,6 @@ module Poleica
     class LibreOffice
       include Poleica::Converters::Utils
 
-      BIN_PATHS = {
-        linux:  '/usr/lib/libreoffice/program/soffice.bin',
-        osx: '/Applications/LibreOffice.app/Contents/MacOS/soffice.bin'
-      }
-
       COMPATIBLE_TYPES = [
         Types::Document
       ]

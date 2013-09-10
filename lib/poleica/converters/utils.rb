@@ -6,6 +6,7 @@ module Poleica
   module Converters
     # An Utility module for the converters needs to be include
     module Utils
+
       HOST_OS ||= (defined?('RbConfig') ? RbConfig : Config)::CONFIG['host_os']
 
       def windows?
@@ -25,11 +26,19 @@ module Poleica
       end
 
       def bin_path
-        bin_path_key = :BIN_PATHS # rubocop:disable SymbolName
-        bin_paths    = self.class.const_get(bin_path_key)
-        path         = bin_paths[host_os] || bin_paths[:linux]
+        converter     = :"#{underscorize(self.class)}"
+        configuration = Poleica.configuration.send(converter)
+        bin_paths     = configuration[:bin_paths]
+        path          = bin_paths[host_os] || bin_paths[:linux]
         raise "#{self.class} not found @ #{path}" unless File.exists?(path)
         path
+      end
+
+      def underscorize(camel_cased_word)
+        word = camel_cased_word.to_s
+        word = word[((word.rindex('::') + 2) || 0)..-1]
+        word.gsub!(/([A-Z]+)/, '_\1').gsub!(/^_/, '').downcase!
+        word
       end
 
       module_function

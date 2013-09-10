@@ -6,11 +6,6 @@ module Poleica
     class GraphicsMagick
       include Poleica::Converters::Utils
 
-      BIN_PATHS = {
-        linux:  '/usr/local/bin/gm',
-        osx:    '/usr/local/bin/gm'
-      }
-
      COMPATIBLE_TYPES = [
        Types::Image,
        Types::PDF
