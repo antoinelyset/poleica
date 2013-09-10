@@ -5,9 +5,9 @@ class ConfigurationTest < Minitest::Test
   def test_timeout_configuration
     start_time = Time.now
     Poleica.configure { |config| config.timeout = 1 }
-    Poleica::Converters::Utils.exec_with_timeout('sleep 2') rescue nil
+    Poleica::Converters::Utils.exec_with_timeout('sleep 10') rescue nil
     duration = Time.now - start_time
-    assert(duration < 2)
+    assert(duration < 10)
   ensure
     Poleica.configure { |config| config.timeout = 120 }
   end
