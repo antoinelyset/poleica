@@ -1,3 +1,7 @@
+# Poleica 0.9.12 (10 September 2013)
+* Add configuration for bin_paths
+# Poleica 0.9.11 (6 September 2013)
+* Replace Spoon by ChildProcess and update Travis conf
 # Poleica 0.9.10 (6 August 2013)
 * Update Libreoffice path and nolog option
 # Poleica 0.9.9 (6 August 2013)
