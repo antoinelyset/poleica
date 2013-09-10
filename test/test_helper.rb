@@ -35,4 +35,4 @@ module Support
     path_without_extension(original_file_path) +
       "-#{digest}.#{converted_extension}"
   end
-end
+end # module Support
