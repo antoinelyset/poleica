@@ -1,5 +1,5 @@
 # Poleica
-## Poleica = Polaroid + Leica (Real Hipster)
+## Ruby conversion tool & preview creator 
 
 [![Build Status](https://travis-ci.org/antoinelyset/poleica.png?branch=master)](https://travis-ci.org/antoinelyset/poleica)
 [![Coverage Status](https://coveralls.io/repos/antoinelyset/poleica/badge.png)](https://coveralls.io/r/antoinelyset/poleica)
@@ -7,7 +7,15 @@
 [![Gem Version](https://badge.fury.io/rb/poleica.png)](http://badge.fury.io/rb/poleica)
 [![Dependency Status](https://gemnasium.com/antoinelyset/Poleica.png)](https://gemnasium.com/antoinelyset/poleica)
 
-## Install
+## Concept
+
+_ -> PDF -> Image
+
+Image    -> Image
+
+Basically it just takes some files, tries to convert it to PDF or PNG. It was modularly written, so you can improve the gem with more conversion tools (html to pdf is planned).
+
+## Installation
 
 __Ubuntu__ :
 
@@ -33,11 +41,6 @@ or in __Gemfile__ :
 gem 'poleica'
 ```
 
-## Concept
-
-_ -> PDF -> Image
-
-Image    -> Image
 
 ## Usage
 
@@ -106,3 +109,6 @@ end
 
 Poleica is released under the [MIT
 License](http://www.opensource.org/licenses/MIT)
+
+## Trivia 
+Poleica = Polaroid + Leica (hipsterism)
