@@ -5,7 +5,7 @@
 [![Coverage Status](https://coveralls.io/repos/antoinelyset/poleica/badge.png)](https://coveralls.io/r/antoinelyset/poleica)
 [![Code Climate](https://codeclimate.com/github/antoinelyset/poleica.png)](https://codeclimate.com/github/antoinelyset/poleica)
 [![Gem Version](https://badge.fury.io/rb/poleica.png)](http://badge.fury.io/rb/poleica)
-[![Dependency Status](https://gemnasium.com/antoinelyset/Poleica.png)](https://gemnasium.com/antoinelyset/poleica)
+[![Dependency Status](https://gemnasium.com/antoinelyset/poleica.png)](https://gemnasium.com/antoinelyset/poleica)
 
 ## Concept
 
@@ -19,7 +19,7 @@ Basically it just takes some files, tries to convert it to PDF or PNG. It was mo
 
 __Ubuntu__ :
 
-Look at .travis.yml file
+Look at [.travis.yml](https://github.com/antoinelyset/poleica/blob/master/.travis.yml) file
 
 __MacOS__ :
 
