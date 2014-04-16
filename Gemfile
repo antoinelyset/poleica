@@ -5,6 +5,7 @@ source 'https://rubygems.org'
 gemspec
 
 group :test do
+  gem 'rake'
   gem 'minitest'
   gem 'rubocop',   github:  'bbatsov/rubocop'
   gem 'coveralls', require: false
