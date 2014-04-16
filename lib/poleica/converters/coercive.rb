@@ -9,7 +9,7 @@ module Poleica
         Types::All
       ]
 
-      # TODO Think about another way of declare return types
+      # TODO: Think about another way of declare return types
       TYPE_RETURNED_BY_METHOD = {
         to_pdf: Types::PDF,
         to_png: Types::Image

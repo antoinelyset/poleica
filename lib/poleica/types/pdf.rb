@@ -7,12 +7,11 @@ module Poleica
         'application/pdf' # pdf
       ]
 
-      COMPATIBLE_EXTENSIONS = %w{
+      COMPATIBLE_EXTENSIONS = %w(
         pdf
-      }
+      )
 
       def initialize(file_path)
-
       end
     end # class PDF
   end # module Types

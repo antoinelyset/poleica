@@ -1,4 +1,6 @@
 # -*- encoding: utf-8 -*-
+# The Awesome Namespace
+# Poleica is a general converter
 module Poleica
   def self.new(file_or_path)
     file_or_path = file_or_path.path if file_or_path.respond_to?(:path)

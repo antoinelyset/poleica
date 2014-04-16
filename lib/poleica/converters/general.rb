@@ -4,7 +4,6 @@ module Poleica
     # The General converter, it handles any file type and return null for
     # unknown conversion
     class General
-
       COMPATIBLE_TYPES = [
         Types::All
       ]

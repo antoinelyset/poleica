@@ -22,7 +22,7 @@ module Poleica
       ]
 
       # Unsupported :( : key, pages
-      COMPATIBLE_EXTENSIONS = %w{
+      COMPATIBLE_EXTENSIONS = %w(
         html
         htm
         odt
@@ -43,10 +43,9 @@ module Poleica
         pps
         txt
         rft
-      }
+      )
 
       def initialize(file_path)
-
       end
     end # class Document
   end # module Types

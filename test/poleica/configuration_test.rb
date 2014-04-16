@@ -5,7 +5,9 @@ class ConfigurationTest < Minitest::Test
   def test_timeout_configuration
     start_time = Time.now
     Poleica.configure { |config| config.timeout = 1 }
+    # rubocop:disable RescueModifier
     Poleica::Converters::Utils.exec_with_timeout('sleep 10') rescue nil
+    # rubocop:enable
     duration = Time.now - start_time
     assert(duration < 10)
   ensure

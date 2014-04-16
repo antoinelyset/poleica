@@ -6,12 +6,12 @@ module Poleica
     class GraphicsMagick
       include Poleica::Converters::Utils
 
-     COMPATIBLE_TYPES = [
-       Types::Image,
-       Types::PDF
-     ]
+      COMPATIBLE_TYPES = [
+        Types::Image,
+        Types::PDF
+      ]
 
-     DEFAULT_MEASURE = 612
+      DEFAULT_MEASURE = 612
 
       attr_reader :polei
 
@@ -23,7 +23,7 @@ module Poleica
         opts_gen = OptionsGenerator.new(polei, options)
         exec_with_timeout(bin_path, opts_gen.generate)
         expected_file_path = opts_gen[:path]
-        File.exists?(expected_file_path) ? expected_file_path : nil
+        File.exist?(expected_file_path) ? expected_file_path : nil
       end
 
       private
@@ -61,13 +61,13 @@ module Poleica
             force_resize: false,
             auto_orient: true,
             thumbnail: false,
-            page: 0,
+            page: 0
           }
         end
 
         def page_options
           @page_options ||=
-            "#{Array(options[:page]).flatten.compact.uniq.sort.to_s}"
+            "#{Array(options[:page]).flatten.compact.uniq.sort}"
         end
 
         def orient_options
@@ -88,16 +88,16 @@ module Poleica
               'center',
               '-extent',
               "#{options[:width]}x#{options[:height]}"
-            ]
+          ]
         end
 
         def resize_options
           @resize_options ||=
             [
               '-resize',
-              "#{options[:width]}x#{options[:height]}" +
-                "#{'!' if options[:force_resize]}"
-            ]
+              "#{options[:width]}x#{options[:height]}" \
+              "#{'!' if options[:force_resize]}"
+          ]
         end
 
         def output_options

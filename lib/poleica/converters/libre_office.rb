@@ -21,10 +21,10 @@ module Poleica
         opts_gen = OptionsGenerator.new(polei, options, :pdf)
         exec_with_timeout(bin_path, opts_gen.generate)
         expected_file_path = opts_gen[:path] || polei.path_with_md5(:pdf)
-        File.exists?(expected_file_path) ? expected_file_path : nil
+        File.exist?(expected_file_path) ? expected_file_path : nil
       ensure
         temp_file_path = opts_gen.temp_path
-        File.delete(temp_file_path) if File.exists?(temp_file_path)
+        File.delete(temp_file_path) if File.exist?(temp_file_path)
       end
 
       private
@@ -58,7 +58,7 @@ module Poleica
         # @return temp_path [String]
         def temp_path
           @temp_path ||= generate_temp_path
-          FileUtils.cp(polei.path, @temp_path) unless File.exists?(@temp_path)
+          FileUtils.cp(polei.path, @temp_path) unless File.exist?(@temp_path)
           @temp_path
         end
 
@@ -78,19 +78,19 @@ module Poleica
         end
 
         def pathable_object
-            pathable_object = Struct.new(:path).new(options[:path])
-            pathable_object.extend(Poleica::Pathable)
+          pathable_object = Struct.new(:path).new(options[:path])
+          pathable_object.extend(Poleica::Pathable)
         end
 
         def default_options
-          %w{
-             --nologo
-             --headless
-             --invisible
-             --norestore
-             --nolockcheck
-             --convert-to
-          }
+          %w(
+            --nologo
+            --headless
+            --invisible
+            --norestore
+            --nolockcheck
+            --convert-to
+          )
         end
 
         def output_options

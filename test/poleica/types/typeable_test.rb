@@ -2,14 +2,14 @@
 require 'test_helper'
 # Test the Typeable Module
 class TypeableTest < Minitest::Test
-  EXTENSION_NAMES ||= %w{doc pdf mp3 png}
+  EXTENSION_NAMES ||= %w(doc pdf mp3 png)
 
   def test_that_it_extracts_a_mimetype
-    expected_mime_types = %w{
-                            application/pdf
-                            audio/mpeg
-                            image/png
-                          }
+    expected_mime_types = %w(
+      application/pdf
+      audio/mpeg
+      image/png
+    )
     mime_types = files_enumerator.map(&:file_mimetype)
     # Don't test doc files, it doesnt behave the same way
     # on Linux or MacOS (maybe FIXME)
@@ -25,11 +25,11 @@ class TypeableTest < Minitest::Test
 
   def test_that_it_extracts_a_type_object
     expected_classes = [
-                         Poleica::Types::Document,
-                         Poleica::Types::General,
-                         Poleica::Types::Document,
-                         Poleica::Types::Image
-                       ]
+      Poleica::Types::Document,
+      Poleica::Types::General,
+      Poleica::Types::Document,
+      Poleica::Types::Image
+    ]
     classes = files_enumerator.map do |type_detector|
       type_detector.file_type.class
     end

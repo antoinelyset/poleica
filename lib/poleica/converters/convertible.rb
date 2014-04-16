@@ -2,7 +2,6 @@
 module Poleica
   # Conversion Logic, given a type it can search for compatible converters
   module Convertible
-
     CONVERTERS = Poleica::Converters
       .constants.map { |c| Poleica::Converters.const_get(c) } -
         [Poleica::Converters::Utils]
@@ -23,12 +22,12 @@ module Poleica
       compatible_converter = compatible_converters.find do |converter|
         converter.method_defined?(:"to_#{extension}")
       end
-      compatible_converter ||= Converters::Coercive
+      compatible_converter || Converters::Coercive
     end
 
     def compatible_converters
       @compatible_converters ||=
-        compatible_converters_by_type(self.file_type.class) <<
+        compatible_converters_by_type(file_type.class) <<
          Converters::General
     end
 

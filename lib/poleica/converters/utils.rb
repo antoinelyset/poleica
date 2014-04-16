@@ -6,7 +6,6 @@ module Poleica
   module Converters
     # An Utility module for the converters needs to be include
     module Utils
-
       HOST_OS ||= (defined?('RbConfig') ? RbConfig : Config)::CONFIG['host_os']
 
       def windows?
@@ -22,7 +21,7 @@ module Poleica
       end
 
       def host_os
-        [:windows, :osx, :linux].find { |os| self.send(:"#{os}?") }
+        [:windows, :osx, :linux].find { |os| send(:"#{os}?") }
       end
 
       def bin_path
@@ -30,7 +29,7 @@ module Poleica
         configuration = Poleica.configuration.send(converter)
         bin_paths     = configuration[:bin_paths]
         path          = bin_paths[host_os] || bin_paths[:linux]
-        raise "#{self.class} not found @ #{path}" unless File.exists?(path)
+        fail "#{self.class} not found @ #{path}" unless File.exist?(path)
         path
       end
 
@@ -59,7 +58,7 @@ module Poleica
         timeout ? process.poll_for_exit(timeout) : process.wait
       rescue ChildProcess::TimeoutError => e
         process.stop
-        raise(Poleica::TimeoutError.new(e.message))
+        raise Poleica::TimeoutError, e.message
       end
 
       def set_process_stdout(process, no_stdout)

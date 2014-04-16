@@ -1,4 +1,5 @@
 # -*- encoding: utf-8 -*-
+# Poleica namespace
 module Poleica
   # Configuration class
   class Configuration

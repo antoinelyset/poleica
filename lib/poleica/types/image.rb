@@ -14,7 +14,7 @@ module Poleica
         'image/png'                # .png
       ]
 
-      COMPATIBLE_EXTENSIONS = %w{
+      COMPATIBLE_EXTENSIONS = %w(
         tiff
         jpeg
         ppm
@@ -27,10 +27,9 @@ module Poleica
         tif
         gif
         png
-      }
+      )
 
       def initialize(file_path)
-
       end
     end # class Image
   end # module Types

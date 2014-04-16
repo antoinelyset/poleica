@@ -10,7 +10,7 @@ module Poleica
 
     def initialize(path)
       @path = path.strip
-      raise "No file @ #{path}" unless File.exists?(path)
+      fail "No file @ #{path}" unless File.exist?(path)
     end
 
     def name

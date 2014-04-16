@@ -7,11 +7,11 @@ module Poleica
     end
 
     def path_without_extension
-      File.join(File.dirname(self.path), File.basename(self.path, '.*'))
+      File.join(File.dirname(path), File.basename(path, '.*'))
     end
 
     def path_with_md5(extension = self.extension)
-      data   = File.read(self.path)
+      data   = File.read(path)
       md5    = Digest::MD5.new
       digest = md5.hexdigest(data)
       "#{path_without_extension}-#{digest}.#{extension}"

@@ -1,7 +1,6 @@
 # -*- encoding: utf-8 -*-
 require 'test_helper'
 # Test the Coercive Converter Module
-
 class CoerciveTest < Minitest::Test
   DOC_PATH = "#{Support.support_path}/files/example.doc"
 
@@ -18,13 +17,13 @@ class CoerciveTest < Minitest::Test
 
   def test_try_convert_intermediary_file_creation
     coercive_conv.send(:coerce, :to_png, {})
-    assert(File.exists?(expected_pdf_path))
+    assert(File.exist?(expected_pdf_path))
     clean_pdf_file
   end
 
   def test_try_convert_file_creation
     coercive_conv.send(:try_convert, :to_png)
-    assert(File.exists?(find_png_path))
+    assert(File.exist?(find_png_path))
     clean_png_file(find_png_path)
     clean_pdf_file
   end
@@ -32,7 +31,7 @@ class CoerciveTest < Minitest::Test
   def test_coercive_conversion
     polei = Poleica.new(DOC_PATH)
     returned_path = polei.to_png
-    assert(File.exists?(returned_path))
+    assert(File.exist?(returned_path))
     clean_png_file(find_png_path)
   end
 
@@ -45,11 +44,11 @@ class CoerciveTest < Minitest::Test
   private
 
   def clean_pdf_file
-    File.exists?(expected_pdf_path) && File.delete(expected_pdf_path)
+    File.exist?(expected_pdf_path) && File.delete(expected_pdf_path)
   end
 
   def clean_png_file(png_path = expected_png_path)
-    File.exists?(png_path) && File.delete(png_path)
+    File.exist?(png_path) && File.delete(png_path)
   end
 
   def expected_pdf_path
