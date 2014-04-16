@@ -1,4 +1,5 @@
 require 'rake/testtask'
+require 'rubocop/rake_task'
 
 Rake::TestTask.new do |t|
   t.libs.push ['lib', 'test']
@@ -6,9 +7,7 @@ Rake::TestTask.new do |t|
   t.verbose    = true
 end
 
-task :rubocop do |t|
-  sh 'rubocop'
-end
+Rubocop::RakeTask.new
 
 task :default => [:test, :rubocop]
 
