@@ -24,12 +24,12 @@ module Poleica
         [:windows, :osx, :linux].find { |os| send(:"#{os}?") }
       end
 
-      def bin_path
-        converter     = :"#{underscorize(self.class)}"
+      def bin_path(given_class = nil)
+        converter     = :"#{underscorize(given_class || self.class)}"
         configuration = Poleica.configuration.send(converter)
         bin_paths     = configuration[:bin_paths]
         path          = bin_paths[host_os] || bin_paths[:linux]
-        fail "#{self.class} not found @ #{path}" unless File.exist?(path)
+        fail "#{converter} not found @ #{path}" unless File.exist?(path)
         path
       end
 
@@ -49,24 +49,42 @@ module Poleica
         [extension, options]
       end
 
-      def exec_with_timeout(bin, args = [], timeout = nil, no_stdout = true)
-        args              = Array(args).map(&:to_s)
-        timeout         ||= Poleica.configuration.timeout
-        process           = ChildProcess.build(bin, *args)
-        set_process_stdout(process, no_stdout)
-        process.start
-        timeout ? process.poll_for_exit(timeout) : process.wait
+      def exec_with_timeout(bin, args = [], options = {})
+        timeout           = options[:timeout] || Poleica.configuration.timeout
+        process           = ChildProcess.build(bin, *Array(args).map(&:to_s))
+        map_std(process) do
+          process.start
+          timeout ? process.poll_for_exit(timeout) : process.wait
+        end
       rescue ChildProcess::TimeoutError => e
         process.stop
         raise Poleica::TimeoutError, e.message
       end
 
-      def set_process_stdout(process, no_stdout)
-        if no_stdout
-          null              = IO.new(IO.sysopen('/dev/null', 'w'), 'w')
-          process.io.stdout = process.io.stderr = null
-        else
-          process.io.inherit!
+      def map_std(process, &block)
+        stdout, stdout_w, stderr, stderr_w = init_process_std(process)
+        yield
+        stderr_w.close.nil? && fail_if_error(process, stderr)
+        stdout_w.close.nil? && stdout.read
+      ensure
+        stderr_w.close unless stderr_w.closed?
+        stdout_w.close unless stdout_w.closed?
+      end
+
+      def init_process_std(process)
+        stdout, stdout_w = IO.pipe
+        stderr, stderr_w = IO.pipe
+
+        process.io.stdout = stdout_w
+        process.io.stderr = stderr_w
+
+        [stdout, stdout_w, stderr, stderr_w]
+      end
+
+      def fail_if_error(process, stderr)
+        unless process.exit_code == 0
+          message = "Code: #{process.exit_code} #{stderr.read}"
+          fail Poleica::ProcessError, message
         end
       end
     end # module Utils

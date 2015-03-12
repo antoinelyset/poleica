@@ -5,7 +5,7 @@ class UtilsTest < Minitest::Test
   def test_exec_with_timeout
     start_time = Time.now
     # rubocop:disable RescueModifier
-    Poleica::Converters::Utils.exec_with_timeout('sleep', 2, 0.1) rescue nil
+    Poleica::Converters::Utils.exec_with_timeout('sleep', 2, timeout: 0.1) rescue nil
     # rubocop:enable
     duration = Time.now - start_time
     assert(duration < 2)
@@ -13,7 +13,7 @@ class UtilsTest < Minitest::Test
 
   def test_exec_with_timeout_raise_an_exception
     assert_raises(Poleica::TimeoutError) do
-      Poleica::Converters::Utils.exec_with_timeout('sleep', 2, 0.1)
+      Poleica::Converters::Utils.exec_with_timeout('sleep', 2, timeout: 0.1)
     end
   end
 
@@ -26,5 +26,11 @@ class UtilsTest < Minitest::Test
     assert(`ps -a | grep example.doc | grep -v grep`.empty?)
   ensure
     Poleica.configure { |config| config.timeout = 120 }
+  end
+
+  def test_exec_with_timeout_exception
+    assert_raises(Poleica::ProcessError) do
+      Poleica::Converters::Utils.exec_with_timeout('false')
+    end
   end
 end
