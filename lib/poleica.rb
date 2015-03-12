@@ -22,8 +22,11 @@ require 'poleica/types/all'
 require 'poleica/converters/utils'
 require 'poleica/converters/general'
 require 'poleica/converters/coercive'
-require 'poleica/converters/graphics_magick'
 require 'poleica/converters/libre_office'
+require 'poleica/converters/graphics_magick/graphics_magick'
+require 'poleica/converters/graphics_magick/thumbnail_options_generator'
+require 'poleica/converters/graphics_magick/convert_options_generator'
+# /!\ Should be last converters
 require 'poleica/converters/convertible'
 
 require 'poleica/pathable'

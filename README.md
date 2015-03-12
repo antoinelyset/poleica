@@ -46,6 +46,8 @@ gem 'poleica'
 
 ```
 Poleica.new(file_path).to_png
+Poleica.new(file_path).to_pdf
+Poleica.new(file_path).to_thumbnail
 Poleica.new(file_path).to_png(width: 400, weight: 400)
 ```
 
@@ -66,7 +68,6 @@ end
 - weight       : pixels number
 - width        : pixels number
 - force_resize : boolean(false) (it doesnt preserve the image ratio)
-- thumbnail    : boolean(false) (it crops the image, preserving the image ratio)
 - path         : string folder or file
 - auto_orient  : boolean(true) (keep the orientation extracted from EXIF)
 

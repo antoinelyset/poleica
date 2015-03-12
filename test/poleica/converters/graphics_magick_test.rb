@@ -43,7 +43,7 @@ class GraphicsMagickTest < Minitest::Test
 
   def test_path_folder
     path_option = '/tmp/'
-    expected_path = "/tmp/#{File.basename(pdf_polei.path_with_md5)}"
+    expected_path = "/tmp/#{File.basename(pdf_polei.path_with_md5(:png))}"
     returned_path = pdf_polei.to_png(path: path_option)
     assert(returned_path)
     assert(File.exist?(expected_path))
@@ -75,16 +75,34 @@ class GraphicsMagickTest < Minitest::Test
     clean_png_file
   end
 
-  def test_thumbnail_option
-    returned_path = pdf_polei.to_png(width: 100,
-                                     height: 100,
-                                     thumbnail: true)
-    expected_path = Support.expected_converted_path(PDF_PATH, :png)
-    bin_path = Poleica::Converters::GraphicsMagick.new(pdf_polei).bin_path
+  def test_thumbnail
+    path_option = "#{Support.support_path}/files/120x70.png"
+    polei       = Poleica::Polei.new(path_option)
+    returned_path = polei.to_thumbnail(width: 100,
+                                       height: 100)
+    expected_path = Support.expected_converted_path(path_option)
+    bin_path = Poleica::Converters::GraphicsMagick.new(polei).bin_path
     assert_equal(expected_path, returned_path)
     size = `#{bin_path} identify #{returned_path}`.split[2][/(\w)*/]
-    assert_equal('100x100', size)
-    clean_png_file
+    assert_equal('100x58', size)
+    if File.exist?(expected_path)
+      File.delete(expected_path)
+    end
+  end
+
+  def test_thumbnail_too_small
+    path_option = "#{Support.support_path}/files/30x30.png"
+    polei       = Poleica::Polei.new(path_option)
+    returned_path = polei.to_thumbnail(width: 100,
+                                       height: 100)
+    expected_path = Support.expected_converted_path(path_option)
+    bin_path = Poleica::Converters::GraphicsMagick.new(polei).bin_path
+    assert_equal(expected_path, returned_path)
+    size = `#{bin_path} identify #{returned_path}`.split[2][/(\w)*/]
+    assert_equal('30x30', size)
+    if File.exist?(expected_path)
+      File.delete(expected_path)
+    end
   end
 
   private

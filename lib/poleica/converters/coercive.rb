@@ -12,7 +12,8 @@ module Poleica
       # TODO: Think about another way of declare return types
       TYPE_RETURNED_BY_METHOD = {
         to_pdf: Types::PDF,
-        to_png: Types::Image
+        to_png: Types::Image,
+        to_thumbnail: Types::Image
       }
 
       attr_reader :polei
