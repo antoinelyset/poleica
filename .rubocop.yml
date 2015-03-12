@@ -1,0 +1,8 @@
+AllCops:
+  Exclude:
+    - test/**/*
+    - Rakefile
+  Include:
+    - lib/**/*
+Style/MultilineOperationIndentation:
+  EnforcedStyle: indented

@@ -29,6 +29,7 @@ module Poleica
 
         def default_options
           {
+            path:   polei.path_with_md5(:png),
             height: DEFAULT_MEASURE,
             width:  DEFAULT_MEASURE,
             auto_orient: true
@@ -44,7 +45,7 @@ module Poleica
             [
               '-resize',
               "#{width_and_height_options}"
-          ]
+            ]
         end
 
         def width_and_height_options
@@ -91,15 +92,11 @@ module Poleica
         end
 
         def output_options
-          @output_path = if options[:path]
-                           if File.directory?(options[:path])
-                             name = File.basename(polei.path_with_md5(:png))
-                             File.join(options[:path], name)
-                           else
-                             options[:path]
-                           end
+          @output_path = if File.directory?(options[:path])
+                           name = File.basename(polei.path_with_md5(:png))
+                           File.join(options[:path], name)
                          else
-                           polei.path_with_md5(:png)
+                           options[:path]
                          end
         end
       end # class ThumbnailOptionsGenerator

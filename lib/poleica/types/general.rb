@@ -7,7 +7,7 @@ module Poleica
       COMPATIBLE_MIMETYPES  = []
       COMPATIBLE_EXTENSIONS = []
 
-      def initialize(file_path)
+      def initialize(_file_path)
       end
     end # class General
   end # module Types

@@ -29,7 +29,7 @@ module Poleica
         png
       )
 
-      def initialize(file_path)
+      def initialize(_file_path)
       end
     end # class Image
   end # module Types

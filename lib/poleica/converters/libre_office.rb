@@ -20,36 +20,34 @@ module Poleica
       def to_pdf(options = {})
         opts_gen = OptionsGenerator.new(polei, options, :pdf)
         exec_with_timeout(bin_path, opts_gen.generate)
-        expected_file_path = opts_gen[:path] || polei.path_with_md5(:pdf)
+        expected_file_path = opts_gen.output_path
         File.exist?(expected_file_path) ? expected_file_path : nil
       ensure
         temp_file_path = opts_gen.temp_path
         File.delete(temp_file_path) if File.exist?(temp_file_path)
       end
 
-      private
-
       # Generate options for the soffice command
       class OptionsGenerator
-        attr_reader :options, :format, :polei
+        attr_reader :options, :format, :polei, :output_path
 
         def initialize(polei, options = {}, format = :pdf)
-          defaults = {}
-          @options = defaults.merge(options)
-          @polei   = polei
-          @format  = format
+          @polei       = polei
+          @format      = format
+          @output_path = options[:path] || polei.path_with_md5(format)
+          @options     = default_options.merge(options)
+        end
+
+        def default_options
+          { path: polei.path_with_md5 }
         end
 
         def generate
           [
-            default_options,
+            default_arguments,
             format,
             output_options
           ].flatten
-        end
-
-        def [](key)
-          options[key]
         end
 
         # Generate a temp path, and create the file this is needed in order to
@@ -65,15 +63,10 @@ module Poleica
         private
 
         def generate_temp_path
-          if options[:path]
-            if File.directory?(options[:path])
-              basename = File.basename(polei.path_with_md5)
-              return File.join(options[:path], basename)
-            end
-            extension = File.extname(polei.path)
-            return pathable_object.path_for_extension(extension[1..-1])
+          if File.directory?(options[:path])
+            File.join(options[:path], File.basename(polei.path_with_md5))
           else
-            return polei.path_with_md5(polei.file_extension)
+            pathable_object.path_for_extension(File.extname(polei.path))
           end
         end
 
@@ -82,7 +75,7 @@ module Poleica
           pathable_object.extend(Poleica::Pathable)
         end
 
-        def default_options
+        def default_arguments
           %w(
             --nologo
             --headless

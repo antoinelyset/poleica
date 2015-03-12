@@ -11,8 +11,8 @@ end
 group :test do
   gem 'rake'
   gem 'minitest'
-  gem 'rubocop',   github:  'bbatsov/rubocop'
-  gem 'coveralls', require: false
+  gem 'rubocop'
+  gem "codeclimate-test-reporter", require: nil
 end
 
 group :development do

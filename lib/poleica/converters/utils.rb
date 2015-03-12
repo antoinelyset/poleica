@@ -9,15 +9,15 @@ module Poleica
       HOST_OS ||= (defined?('RbConfig') ? RbConfig : Config)::CONFIG['host_os']
 
       def windows?
-        !!HOST_OS.match(/mswin|windows|cygwin/i)
+        !HOST_OS.match(/mswin|windows|cygwin/i).nil?
       end
 
       def osx?
-        !!HOST_OS.match(/darwin/i)
+        !HOST_OS.match(/darwin/i).nil?
       end
 
       def linux?
-        !!HOST_OS.match(/linux/i)
+        !HOST_OS.match(/linux/i).nil?
       end
 
       def host_os
@@ -61,7 +61,7 @@ module Poleica
         raise Poleica::TimeoutError, e.message
       end
 
-      def map_std(process, &block)
+      def map_std(process, &_block)
         stdout, stdout_w, stderr, stderr_w = init_process_std(process)
         yield
         stderr_w.close.nil? && fail_if_error(process, stderr)
@@ -82,10 +82,9 @@ module Poleica
       end
 
       def fail_if_error(process, stderr)
-        unless process.exit_code == 0
-          message = "Code: #{process.exit_code} #{stderr.read}"
-          fail Poleica::ProcessError, message
-        end
+        return if process.exit_code == 0
+        message = "Code: #{process.exit_code} #{stderr.read}"
+        fail Poleica::ProcessError, message
       end
     end # module Utils
   end # module Converters

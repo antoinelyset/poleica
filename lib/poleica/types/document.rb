@@ -45,7 +45,7 @@ module Poleica
         rft
       )
 
-      def initialize(file_path)
+      def initialize(_file_path)
       end
     end # class Document
   end # module Types

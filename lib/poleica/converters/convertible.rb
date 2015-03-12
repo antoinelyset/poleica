@@ -2,9 +2,9 @@
 module Poleica
   # Conversion Logic, given a type it can search for compatible converters
   module Convertible
-    CONVERTERS = Poleica::Converters
-      .constants.map { |c| Poleica::Converters.const_get(c) } -
-        [Poleica::Converters::Utils]
+    CONVERTERS = Poleica::Converters.constants
+      .map { |c| Poleica::Converters.const_get(c) } -
+      [Poleica::Converters::Utils]
 
     def method_missing(method, *args, &block)
       extension, options =
@@ -28,7 +28,7 @@ module Poleica
     def compatible_converters
       @compatible_converters ||=
         compatible_converters_by_type(file_type.class) <<
-         Converters::General
+          Converters::General
     end
 
     def compatible_convert_methods

@@ -1,13 +1,7 @@
 # -*- encoding: utf-8 -*-
 if ENV['COVERAGE'] || ENV['TRAVIS']
-  require 'coveralls'
-  require 'simplecov'
-
-  SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
-    SimpleCov::Formatter::HTMLFormatter,
-    Coveralls::SimpleCov::Formatter
-  ]
-  Coveralls.wear!
+  require 'codeclimate-test-reporter'
+  CodeClimate::TestReporter.start
 end
 
 Bundler.require(:default, :test)

@@ -26,3 +26,6 @@ matrix:
     - rvm: jruby-19mode
 notifications:
   email: false
+addons:
+  code_climate:
+    repo_token: 6e49c9e59b6593fc1eb510222536706a1ab6fbbed3a50747f597a1d4ed74d511

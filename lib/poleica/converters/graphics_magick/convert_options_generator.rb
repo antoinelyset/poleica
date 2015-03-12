@@ -26,8 +26,9 @@ module Poleica
 
         def default_options
           {
+            path:   polei.path_with_md5(:png),
             height: DEFAULT_MEASURE,
-            width: DEFAULT_MEASURE,
+            width:  DEFAULT_MEASURE,
             force_resize: false,
             auto_orient: true,
             page: 0
@@ -52,15 +53,11 @@ module Poleica
         end
 
         def output_options
-          @output_path = if options[:path]
-                           if File.directory?(options[:path])
-                             name = File.basename(polei.path_with_md5(:png))
-                             File.join(options[:path], name)
-                           else
-                             options[:path]
-                           end
+          @output_path = if File.directory?(options[:path])
+                           name = File.basename(polei.path_with_md5(:png))
+                           File.join(options[:path], name)
                          else
-                           polei.path_with_md5(:png)
+                           options[:path]
                          end
         end
       end # class OptionsGenerator

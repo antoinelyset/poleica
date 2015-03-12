@@ -14,7 +14,7 @@ module Poleica
         @polei = polei
       end
 
-      def to_bin(options = {})
+      def to_bin(_options = {})
         File.binread(polei.path)
       end
 

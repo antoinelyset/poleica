@@ -7,7 +7,7 @@ Rake::TestTask.new do |t|
   t.verbose    = true
 end
 
-Rubocop::RakeTask.new
+RuboCop::RakeTask.new
 
 task :default => [:test, :rubocop]
 
