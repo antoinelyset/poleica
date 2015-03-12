@@ -10,7 +10,8 @@ if ENV['COVERAGE'] || ENV['TRAVIS']
   Coveralls.wear!
 end
 
-gem     'minitest'
+Bundler.require(:default, :test)
+
 require 'minitest/autorun'
 require 'poleica'
 

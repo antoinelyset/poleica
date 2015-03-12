@@ -4,6 +4,10 @@ source 'https://rubygems.org'
 # Specify your gem's dependencies in poleica.gemspec
 gemspec
 
+platform :mri do
+  gem 'pry-byebug'
+end
+
 group :test do
   gem 'rake'
   gem 'minitest'
@@ -12,8 +16,6 @@ group :test do
 end
 
 group :development do
-  gem 'jazz_hands'
-
   # Guards
   gem 'guard-rubocop'
   gem 'guard-minitest', github: 'guard/guard-minitest'
