@@ -2,8 +2,10 @@ language: ruby
 bundler_args: --without development
 rvm:
   - 1.9.3
-  - 2.0.0
-  - rbx-19mode
+  - 2.1
+  - 2.0
+  - 2.2
+  - rbx-2
   - jruby-19mode
 before_script:
   - sudo apt-get update -qq
@@ -20,7 +22,7 @@ script:
 matrix:
   fast_finish: true
   allow_failures:
+    - rvm: rbx-2
     - rvm: jruby-19mode
-    - rvm: rbx-19mode
 notifications:
   email: false

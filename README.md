@@ -37,14 +37,14 @@ gem install poleica
 
 or in __Gemfile__ :
 
-```
+```ruby
 gem 'poleica'
 ```
 
 
 ## Usage
 
-```
+```ruby
 Poleica.new(file_path).to_png
 Poleica.new(file_path).to_pdf
 Poleica.new(file_path).to_thumbnail
@@ -55,7 +55,7 @@ Poleica.new(file_path).to_png(width: 400, weight: 400)
 
 Example : 
 
-```
+```ruby
 Poleica.configure do |config|
   config.timeout = 2 # time in secs
   config.libre_office[:bin_paths][:linux] = '/usr/local/bin/gm'
