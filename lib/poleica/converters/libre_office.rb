@@ -66,7 +66,7 @@ module Poleica
           if File.directory?(options[:path])
             File.join(options[:path], File.basename(polei.path_with_md5))
           else
-            pathable_object.path_for_extension(File.extname(polei.path))
+            pathable_object.path_for_extension(polei.extension)
           end
         end
 

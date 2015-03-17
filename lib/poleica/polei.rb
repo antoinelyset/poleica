@@ -6,19 +6,11 @@ module Poleica
     include Poleica::Pathable
     include Poleica::Convertible
 
-    attr_reader :path, :name
+    attr_reader :path
 
     def initialize(path)
       @path = path.strip
       fail "No file @ #{path}" unless File.exist?(path)
-    end
-
-    def name
-      File.basename(path, ".#{extension}")
-    end
-
-    def extension
-      File.extname(path)[1..-1]
     end
   end # class Polei
 end # module Poleica

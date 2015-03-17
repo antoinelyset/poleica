@@ -9,7 +9,7 @@ GIT
 PATH
   remote: .
   specs:
-    poleica (0.10.0)
+    poleica (0.10.3)
       childprocess
 
 GEM
