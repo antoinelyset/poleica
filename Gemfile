@@ -4,8 +4,10 @@ source 'https://rubygems.org'
 # Specify your gem's dependencies in poleica.gemspec
 gemspec
 
-platform :mri do
-  gem 'pry-byebug'
+if RUBY_VERSION.split('.').first == '2'
+  platform :mri do
+    gem 'pry-byebug'
+  end
 end
 
 group :test do
