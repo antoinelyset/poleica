@@ -1,3 +1,5 @@
+
+
 # Poleica
 ## Ruby conversion tool & preview creator 
 
@@ -58,8 +60,8 @@ Example :
 ```ruby
 Poleica.configure do |config|
   config.timeout = 2 # time in secs
-  config.libre_office[:bin_paths][:linux] = '/usr/local/bin/gm'
-  config.graphics_magick[:bin_paths][:osx] = '/Applications/OpenOffice.app/Contents/MacOS/soffice.bin'
+  config.libre_office[:bin_paths][:linux] = '/usr/lib/libreoffice/program/soffice.bin'
+  config.graphics_magick[:bin_paths][:osx] = '/usr/local/bin/gm'
 end
 ```
 
